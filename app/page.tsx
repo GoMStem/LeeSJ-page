@@ -93,42 +93,24 @@ export default function Home() {
       {/* Hero Section */}
       <section
         className="px-6 relative overflow-hidden flex flex-col"
-        style={{ backgroundColor: '#52412F', minHeight: '70vh' }}
+        style={{ backgroundColor: '#FAF6F1', minHeight: '70vh' }}
       >
-        {/* 배경 로고 */}
-        <div
-          className="hero-bg absolute inset-0"
-          style={{
-            backgroundImage: `url(/logo.png)`,
-            backgroundRepeat: 'no-repeat',
-            opacity: 0.25,
-          }}
-        />
-        {/* 하단 그라데이션 페이드 */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-32"
-          style={{ background: 'linear-gradient(to bottom, transparent, #52412F)' }}
-        />
-
-
         <div className="h-[75px] flex-shrink-0" />
         <div className="flex-1 flex items-center">
         <div className="max-w-5xl mx-auto text-center relative z-10 py-10 md:py-16 px-4 w-full">
-          <p className="text-xs tracking-[0.4em] mb-4 md:mb-6 font-medium" style={{ color: '#D4A96A' }}>
-            PREMIUM ENGLISH EDUCATION
-          </p>
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 md:mb-6 tracking-wide" style={{ color: '#FFFFFF' }}>
-            이수진 영어
-          </h1>
-          <div className="flex items-center justify-center gap-3 mb-6 md:mb-8">
-            <div className="h-px w-12 md:w-16" style={{ backgroundColor: '#D4A96A' }} />
-            <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#D4A96A' }} />
-            <div className="h-px w-12 md:w-16" style={{ backgroundColor: '#D4A96A' }} />
+          <div className="mb-8 md:mb-10 flex justify-center">
+            <Image
+              src="/nav-logo.png"
+              alt="이수진영어 내신코치"
+              width={520}
+              height={170}
+              className="object-contain w-full max-w-lg"
+            />
           </div>
           <p className="text-lg md:text-2xl mb-4 md:mb-6 font-semibold italic leading-snug" style={{ color: '#D4A96A' }}>
             북일고 영어의 압도적 1위,<br className="md:hidden" /> 이수진이 증명합니다.
           </p>
-          <p className="text-sm md:text-lg mb-10 md:mb-12 leading-loose max-w-2xl mx-auto font-normal" style={{ color: '#FFFFFF', opacity: 0.85 }}>
+          <p className="text-sm md:text-lg mb-10 md:mb-12 leading-loose max-w-2xl mx-auto font-normal" style={{ color: '#52412F', opacity: 0.75 }}>
             24년차 베테랑(북일고 10년) 전문가가 만들어가는<br />
             체계적이고 차별화된 프리미엄 영어교육
           </p>
@@ -155,9 +137,9 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="about" className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
+      <section id="about" className="py-28 px-6" style={{ backgroundColor: '#52412F' }}>
         <div className="max-w-6xl mx-auto">
-          <SectionTitle>왜 이수진 영어인가</SectionTitle>
+          <SectionTitle light>왜 이수진 영어인가</SectionTitle>
           <div className="grid md:grid-cols-3 gap-8">
             {[0, 1, 2].map(i => (
               <div
@@ -165,9 +147,9 @@ export default function Home() {
                 className="relative overflow-hidden rounded-xl p-12"
                 style={{
                   minHeight: '300px',
-                  backgroundColor: '#52412F',
+                  backgroundColor: '#FFFFFF',
                   borderTop: '3px solid #D4A96A',
-                  boxShadow: '0 4px 24px rgba(82,65,47,0.2)',
+                  boxShadow: '0 4px 24px rgba(0,0,0,0.2)',
                 }}
                 onMouseEnter={e => {
                   const overlay = e.currentTarget.querySelector('.shine-overlay') as HTMLElement;
@@ -192,9 +174,9 @@ export default function Home() {
       </section>
 
       {/* Programs Section */}
-      <section id="programs" className="py-28 px-6" style={{ backgroundColor: '#52412F' }}>
+      <section id="programs" className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
         <div className="max-w-6xl mx-auto">
-          <SectionTitle light>학원 관리 시스템</SectionTitle>
+          <SectionTitle>학원 관리 시스템</SectionTitle>
           <div className="grid md:grid-cols-2 gap-8">
             {[0, 1, 2, 3].map(i => (
               <div
@@ -219,16 +201,16 @@ export default function Home() {
       </section>
 
       {/* Why Section 2 */}
-      <section className="py-28 px-6" style={{ backgroundColor: '#FAF6F1', minHeight: '500px' }}>
+      <section className="py-28 px-6" style={{ backgroundColor: '#52412F', minHeight: '500px' }}>
         <div className="max-w-6xl mx-auto">
-          <SectionTitle>내용구상중</SectionTitle>
+          <SectionTitle light>내용구상중</SectionTitle>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-28 px-6" style={{ backgroundColor: '#6E5637' }}>
+      <section id="contact" className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
         <div className="max-w-5xl mx-auto">
-          <SectionTitle light>문의하기</SectionTitle>
+          <SectionTitle>문의하기</SectionTitle>
           <p className="text-center -mt-8 mb-16 tracking-wider text-sm font-medium" style={{ color: '#D4A96A' }}>
             언제든 편하게 연락주세요
           </p>
