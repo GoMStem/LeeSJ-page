@@ -90,6 +90,18 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Top Beige Section */}
+      <section className="flex items-center justify-center px-6" style={{ backgroundColor: '#FAF6F1', marginTop: '65px', minHeight: '300px' }}>
+        <Image
+          src="/nav-logo.png"
+          alt="이수진영어 내신코치"
+          width={480}
+          height={160}
+          className="object-contain w-full max-w-md md:max-w-xl"
+          priority
+        />
+      </section>
+
       {/* Hero Section */}
       <section
         className="px-6 relative overflow-hidden flex flex-col"
@@ -110,8 +122,6 @@ export default function Home() {
           style={{ background: 'linear-gradient(to bottom, transparent, #52412F)' }}
         />
 
-        {/* 네비바 높이만큼 공간 확보 */}
-        <div className="h-[75px] flex-shrink-0" />
 
         <div className="flex-1 flex items-center">
         <div className="max-w-5xl mx-auto text-center relative z-10 py-10 md:py-16 px-4 w-full">
