@@ -7,13 +7,15 @@ import Image from 'next/image';
 function SectionTitle({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
   return (
     <div className="text-center mb-16">
-      <h2 className="text-4xl font-semibold tracking-wide mb-4" style={{ color: light ? '#FFFFFF' : '#52412F' }}>
+      <h2 className="text-4xl font-semibold tracking-[0.12em] mb-5" style={{ color: light ? '#FFFFFF' : '#52412F' }}>
         {children}
       </h2>
       <div className="flex items-center justify-center gap-3">
-        <div className="h-px w-12" style={{ backgroundColor: '#D4A96A' }} />
-        <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#D4A96A' }} />
-        <div className="h-px w-12" style={{ backgroundColor: '#D4A96A' }} />
+        <div className="h-px w-20" style={{ backgroundColor: '#D4A96A', opacity: 0.7 }} />
+        <div className="w-1 h-1 rounded-full" style={{ backgroundColor: '#D4A96A' }} />
+        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: '#D4A96A' }} />
+        <div className="w-1 h-1 rounded-full" style={{ backgroundColor: '#D4A96A' }} />
+        <div className="h-px w-20" style={{ backgroundColor: '#D4A96A', opacity: 0.7 }} />
       </div>
     </div>
   );
@@ -37,8 +39,12 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav
-        className="fixed top-0 left-0 right-0 bg-white z-50"
-        style={{ borderBottom: '1px solid #E8DDD4' }}
+        className="fixed top-0 left-0 right-0 bg-white z-50 transition-shadow duration-300"
+        style={{
+          borderTop: '2px solid #D4A96A',
+          borderBottom: '1px solid #E8DDD4',
+          boxShadow: scrollProgress > 0 ? '0 4px 24px rgba(82,65,47,0.09)' : 'none',
+        }}
       >
         <div className="max-w-6xl mx-auto px-8 py-5 flex items-center justify-between">
           <Image
@@ -93,24 +99,32 @@ export default function Home() {
       {/* Hero Section */}
       <section
         className="px-6 relative overflow-hidden flex flex-col"
-        style={{ backgroundColor: '#FAF6F1', minHeight: '70vh' }}
+        style={{ background: 'radial-gradient(ellipse at 50% 20%, #F2E8D9 0%, #FAF6F1 65%)', minHeight: '70vh' }}
       >
         <div className="h-[90px] flex-shrink-0" />
         <div className="flex-1 flex items-center">
         <div className="max-w-5xl mx-auto text-center relative z-10 py-10 md:py-16 px-4 w-full">
-          <div className="mb-8 md:mb-10 flex justify-center">
+          <div className="mb-6 md:mb-8 flex justify-center">
             <Image
               src="/nav-logo.png"
               alt="이수진영어 내신코치"
               width={520}
               height={170}
               className="object-contain w-full max-w-lg"
+              style={{ filter: 'drop-shadow(0 4px 18px rgba(82,65,47,0.13))' }}
             />
+          </div>
+          <div className="flex items-center justify-center gap-3 mb-6 md:mb-8">
+            <div className="h-px w-16" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
+            <div className="w-1 h-1 rounded-full" style={{ backgroundColor: '#D4A96A' }} />
+            <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#D4A96A' }} />
+            <div className="w-1 h-1 rounded-full" style={{ backgroundColor: '#D4A96A' }} />
+            <div className="h-px w-16" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
           </div>
           <p className="text-lg md:text-2xl mb-4 md:mb-6 font-semibold italic leading-snug" style={{ color: '#D4A96A' }}>
             북일고 영어의 압도적 1위,<br className="md:hidden" /> 이수진이 결과로 증명합니다.
           </p>
-          <p className="text-sm md:text-lg mb-10 md:mb-12 leading-loose max-w-2xl mx-auto font-normal" style={{ color: '#52412F', opacity: 0.75 }}>
+          <p className="text-sm md:text-lg mb-10 md:mb-12 leading-loose max-w-2xl mx-auto font-normal tracking-wide" style={{ color: '#52412F', opacity: 0.7 }}>
             24년차 베테랑(북일고 10년) 전문가가 만들어가는<br />
             체계적이고 차별화된 프리미엄 영어교육
           </p>
@@ -293,14 +307,23 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-14 px-6" style={{ backgroundColor: '#FFFFFF' }}>
+      <footer className="py-14 px-6" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid #E8DDD4' }}>
         <div className="max-w-6xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <div className="h-px w-16" style={{ backgroundColor: '#D4A96A' }} />
-            <h3 className="text-lg font-semibold tracking-widest" style={{ color: '#52412F' }}>이수진 영어</h3>
-            <div className="h-px w-16" style={{ backgroundColor: '#D4A96A' }} />
+          <div className="flex justify-center mb-5">
+            <Image
+              src="/nav-logo.png"
+              alt="이수진영어 내신코치"
+              width={160}
+              height={52}
+              className="object-contain opacity-80"
+            />
           </div>
-          <p className="text-gray-500 text-sm tracking-wide">Tel: 02-1234-5678 &nbsp;|&nbsp; Email: info@leesujin.com</p>
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div className="h-px w-12" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
+            <div className="w-1 h-1 rounded-full" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
+            <div className="h-px w-12" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
+          </div>
+          <p className="text-gray-400 text-sm tracking-wide">Tel: 02-1234-5678 &nbsp;|&nbsp; Email: info@leesujin.com</p>
           <p className="text-gray-300 mt-4 text-xs tracking-widest">© 2026 이수진 영어. All rights reserved.</p>
         </div>
       </footer>
