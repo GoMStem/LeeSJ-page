@@ -95,7 +95,7 @@ export default function Home() {
         className="px-6 relative overflow-hidden flex flex-col"
         style={{ backgroundColor: '#FAF6F1', minHeight: '70vh' }}
       >
-        <div className="h-[75px] flex-shrink-0" />
+        <div className="h-[90px] flex-shrink-0" />
         <div className="flex-1 flex items-center">
         <div className="max-w-5xl mx-auto text-center relative z-10 py-10 md:py-16 px-4 w-full">
           <div className="mb-8 md:mb-10 flex justify-center">
@@ -108,7 +108,7 @@ export default function Home() {
             />
           </div>
           <p className="text-lg md:text-2xl mb-4 md:mb-6 font-semibold italic leading-snug" style={{ color: '#D4A96A' }}>
-            북일고 영어의 압도적 1위,<br className="md:hidden" /> 이수진이 증명합니다.
+            북일고 영어의 압도적 1위,<br className="md:hidden" /> 이수진이 결과로 증명합니다.
           </p>
           <p className="text-sm md:text-lg mb-10 md:mb-12 leading-loose max-w-2xl mx-auto font-normal" style={{ color: '#52412F', opacity: 0.75 }}>
             24년차 베테랑(북일고 10년) 전문가가 만들어가는<br />
