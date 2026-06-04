@@ -36,7 +36,7 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <nav
-        className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-50"
+        className="fixed top-0 left-0 right-0 bg-white z-50"
         style={{ borderBottom: '1px solid #E8DDD4' }}
       >
         <div className="max-w-6xl mx-auto px-8 py-5 flex items-center justify-between">
