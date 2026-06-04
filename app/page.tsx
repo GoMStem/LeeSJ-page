@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Clock, Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
 function SectionTitle({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
   return (
@@ -40,12 +41,14 @@ export default function Home() {
         style={{ borderBottom: '1px solid #E8DDD4' }}
       >
         <div className="max-w-6xl mx-auto px-8 py-5 flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-semibold tracking-widest" style={{ color: '#52412F' }}>
-              이수진 영어
-            </h1>
-            <div className="h-px mt-1" style={{ backgroundColor: '#D4A96A', width: '100%' }} />
-          </div>
+          <Image
+            src="/nav-logo.png"
+            alt="이수진영어 내신코치"
+            width={160}
+            height={52}
+            className="object-contain"
+            priority
+          />
           <button
             className="p-2 rounded-lg transition-colors hover:bg-stone-100"
             onClick={() => setMenuOpen(!menuOpen)}
