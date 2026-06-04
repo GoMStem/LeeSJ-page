@@ -89,7 +89,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section
-        className="px-6 relative overflow-hidden flex items-center"
+        className="px-6 relative overflow-hidden flex flex-col"
         style={{ backgroundColor: '#52412F', minHeight: '70vh' }}
       >
         {/* 배경 로고 */}
@@ -107,7 +107,11 @@ export default function Home() {
           style={{ background: 'linear-gradient(to bottom, transparent, #52412F)' }}
         />
 
-        <div className="max-w-5xl mx-auto text-center relative z-10 py-16 md:py-20 px-4">
+        {/* 네비바 높이만큼 공간 확보 */}
+        <div className="h-[65px] flex-shrink-0" />
+
+        <div className="flex-1 flex items-center">
+        <div className="max-w-5xl mx-auto text-center relative z-10 py-10 md:py-16 px-4 w-full">
           <p className="text-xs tracking-[0.4em] mb-4 md:mb-6 font-medium" style={{ color: '#D4A96A' }}>
             PREMIUM ENGLISH EDUCATION
           </p>
@@ -144,6 +148,7 @@ export default function Home() {
           >
             수강 신청 문의하기
           </button>
+        </div>
         </div>
       </section>
 
