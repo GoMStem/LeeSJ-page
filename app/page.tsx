@@ -89,7 +89,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section
-        className="px-6 relative overflow-hidden flex items-center"
+        className="px-6 relative overflow-hidden flex items-center pt-[65px] md:pt-0"
         style={{ backgroundColor: '#52412F', minHeight: '70vh' }}
       >
         {/* 배경 로고 */}
