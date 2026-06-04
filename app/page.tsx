@@ -108,7 +108,7 @@ export default function Home() {
         />
 
         {/* 네비바 높이만큼 공간 확보 */}
-        <div className="h-[65px] flex-shrink-0" />
+        <div className="h-[75px] flex-shrink-0" />
 
         <div className="flex-1 flex items-center">
         <div className="max-w-5xl mx-auto text-center relative z-10 py-10 md:py-16 px-4 w-full">
