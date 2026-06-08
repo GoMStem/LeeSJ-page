@@ -152,38 +152,77 @@ export default function Home() {
 
       {/* Features Section */}
       <section id="about" className="py-28 px-6" style={{ backgroundColor: '#52412F' }}>
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <SectionTitle light>왜 이수진 영어인가</SectionTitle>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[0, 1, 2].map(i => (
-              <div
-                key={i}
-                className="relative overflow-hidden rounded-xl p-12"
-                style={{
-                  minHeight: '300px',
-                  backgroundColor: '#FFFFFF',
-                  borderTop: '3px solid #D4A96A',
-                  boxShadow: '0 4px 24px rgba(0,0,0,0.2)',
-                }}
-                onMouseEnter={e => {
-                  const overlay = e.currentTarget.querySelector('.shine-overlay') as HTMLElement;
-                  if (overlay) {
-                    overlay.style.animation = 'none';
-                    void overlay.offsetHeight;
-                    overlay.style.animation = 'glass-shine 1.5s ease forwards';
-                  }
-                }}
-              >
+
+          {/* Sub 1: 최상위권이 선택하는 이유 — 메인 */}
+          <div className="mb-20">
+            <div className="flex items-center justify-center gap-2 mb-12">
+              <div className="h-px w-8" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
+              <p className="text-sm font-medium tracking-widest" style={{ color: '#D4A96A' }}>최상위권이 선택하는 이유</p>
+              <div className="h-px w-8" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {[
+                { stat: '예시 수치 A', label: '항목 설명', desc: '성적 관련 핵심 내용이 들어갑니다. 내용 전달 후 교체 예정입니다.' },
+                { stat: '예시 수치 B', label: '항목 설명', desc: '성적 관련 핵심 내용이 들어갑니다. 내용 전달 후 교체 예정입니다.' },
+                { stat: '예시 수치 C', label: '항목 설명', desc: '성적 관련 핵심 내용이 들어갑니다. 내용 전달 후 교체 예정입니다.' },
+              ].map(({ stat, label, desc }) => (
                 <div
-                  className="shine-overlay absolute inset-0 pointer-events-none"
-                  style={{
-                    background: 'linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.25) 50%, transparent 65%)',
-                    transform: 'translateX(-100%) skewX(-15deg)',
-                  }}
-                />
-              </div>
-            ))}
+                  key={stat}
+                  className="p-8 rounded-xl text-center"
+                  style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,169,106,0.25)' }}
+                >
+                  <p className="text-3xl font-bold mb-1 tracking-wide" style={{ color: '#D4A96A' }}>{stat}</p>
+                  <p className="text-sm font-semibold mb-4 tracking-wide" style={{ color: '#FFFFFF' }}>{label}</p>
+                  <p className="text-xs leading-relaxed break-keep" style={{ color: 'rgba(255,255,255,0.55)' }}>{desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* 구분선 */}
+          <div className="h-px mb-20" style={{ backgroundColor: 'rgba(212,169,106,0.2)' }} />
+
+          {/* Sub 2 */}
+          <div className="mb-20 grid md:grid-cols-5 gap-4 md:gap-16">
+            <div className="md:col-span-2 flex flex-col justify-center">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#D4A96A' }} />
+                <p className="text-sm font-medium tracking-wide" style={{ color: '#D4A96A' }}>부제목 2 (내용 구상 중)</p>
+              </div>
+              <h3 className="text-xl font-semibold tracking-wide leading-snug break-keep" style={{ color: '#FFFFFF' }}>
+                소제목 제목
+              </h3>
+            </div>
+            <div className="md:col-span-3 flex items-center">
+              <p className="text-sm md:text-base leading-loose tracking-wide break-keep" style={{ color: 'rgba(255,255,255,0.65)' }}>
+                내용 전달 후 교체 예정입니다.
+              </p>
+            </div>
+          </div>
+
+          {/* 구분선 */}
+          <div className="h-px mb-20" style={{ backgroundColor: 'rgba(212,169,106,0.2)' }} />
+
+          {/* Sub 3 */}
+          <div className="grid md:grid-cols-5 gap-4 md:gap-16">
+            <div className="md:col-span-2 flex flex-col justify-center">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#D4A96A' }} />
+                <p className="text-sm font-medium tracking-wide" style={{ color: '#D4A96A' }}>부제목 3 (내용 구상 중)</p>
+              </div>
+              <h3 className="text-xl font-semibold tracking-wide leading-snug break-keep" style={{ color: '#FFFFFF' }}>
+                소제목 제목
+              </h3>
+            </div>
+            <div className="md:col-span-3 flex items-center">
+              <p className="text-sm md:text-base leading-loose tracking-wide break-keep" style={{ color: 'rgba(255,255,255,0.65)' }}>
+                내용 전달 후 교체 예정입니다.
+              </p>
+            </div>
+          </div>
+
         </div>
       </section>
 
