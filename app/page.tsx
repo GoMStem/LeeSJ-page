@@ -157,10 +157,15 @@ export default function Home() {
 
           {/* Sub 1: 최상위권이 선택하는 이유 — 메인 */}
           <div className="mb-20">
-            <div className="flex items-center justify-center gap-2 mb-12">
-              <div className="h-px w-8" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
-              <p className="text-sm font-medium tracking-widest" style={{ color: '#D4A96A' }}>최상위권이 선택하는 이유</p>
-              <div className="h-px w-8" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
+            <div className="text-center mb-12">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <div className="h-px w-8" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
+                <p className="text-base font-semibold tracking-widest" style={{ color: '#D4A96A' }}>최상위권이 선택하는 이유</p>
+                <div className="h-px w-8" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
+              </div>
+              <p className="text-2xl md:text-3xl font-semibold tracking-wide break-keep" style={{ color: '#FFFFFF' }}>
+                압도적인 결과로 증명합니다.
+              </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {[
