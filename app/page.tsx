@@ -185,42 +185,36 @@ export default function Home() {
           <div className="h-px mb-20" style={{ backgroundColor: 'rgba(212,169,106,0.2)' }} />
 
           {/* Sub 2 */}
-          <div className="mb-20 grid md:grid-cols-5 gap-4 md:gap-16">
-            <div className="md:col-span-2 flex flex-col justify-center">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#D4A96A' }} />
-                <p className="text-sm font-medium tracking-wide" style={{ color: '#D4A96A' }}>부제목 2 (내용 구상 중)</p>
-              </div>
-              <h3 className="text-xl font-semibold tracking-wide leading-snug break-keep" style={{ color: '#FFFFFF' }}>
-                소제목 제목
-              </h3>
+          <div className="mb-20 max-w-2xl">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#D4A96A' }} />
+              <p className="text-sm font-medium tracking-wide" style={{ color: '#D4A96A' }}>점수는 우연이 아닌 시스템입니다.</p>
             </div>
-            <div className="md:col-span-3 flex items-center">
-              <p className="text-sm md:text-base leading-loose tracking-wide break-keep" style={{ color: 'rgba(255,255,255,0.65)' }}>
-                내용 전달 후 교체 예정입니다.
-              </p>
-            </div>
+            <h3 className="text-2xl md:text-3xl font-semibold leading-snug break-keep mb-6" style={{ color: '#FFFFFF' }}>
+              점수를 넘어 실력을 만듭니다.
+            </h3>
+            <p className="text-sm md:text-base leading-loose break-keep" style={{ color: 'rgba(255,255,255,0.65)' }}>
+              내신 출제 경향 분석부터 서술형·변형문제 대비까지.<br />
+              학생 개개인의 약점을 진단&amp;보완하여, 실제 시험에서 점수로 연결되는 학습 전략을 제공합니다.
+            </p>
           </div>
 
           {/* 구분선 */}
           <div className="h-px mb-20" style={{ backgroundColor: 'rgba(212,169,106,0.2)' }} />
 
           {/* Sub 3 */}
-          <div className="grid md:grid-cols-5 gap-4 md:gap-16">
-            <div className="md:col-span-2 flex flex-col justify-center">
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#D4A96A' }} />
-                <p className="text-sm font-medium tracking-wide" style={{ color: '#D4A96A' }}>부제목 3 (내용 구상 중)</p>
-              </div>
-              <h3 className="text-xl font-semibold tracking-wide leading-snug break-keep" style={{ color: '#FFFFFF' }}>
-                소제목 제목
-              </h3>
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#D4A96A' }} />
+              <p className="text-sm font-medium tracking-wide" style={{ color: '#D4A96A' }}>상위권을 유지하는 학생도, 상위권을 목표로 하는 학생도.</p>
             </div>
-            <div className="md:col-span-3 flex items-center">
-              <p className="text-sm md:text-base leading-loose tracking-wide break-keep" style={{ color: 'rgba(255,255,255,0.65)' }}>
-                내용 전달 후 교체 예정입니다.
-              </p>
-            </div>
+            <h3 className="text-2xl md:text-3xl font-semibold leading-snug break-keep mb-6" style={{ color: '#FFFFFF' }}>
+              함께 성장하는 영어
+            </h3>
+            <p className="text-sm md:text-base leading-loose break-keep" style={{ color: 'rgba(255,255,255,0.65)' }}>
+              단순히 문제를 많이 푸는 수업이 아니라 영어를 이해하고 적용하는 힘을 기릅니다.<br />
+              학생과 함께 목표를 세우고, 결과를 만들어갑니다.
+            </p>
           </div>
 
         </div>
