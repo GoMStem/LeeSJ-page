@@ -189,26 +189,51 @@ export default function Home() {
 
       {/* Programs Section */}
       <section id="programs" className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <SectionTitle>학원 관리 시스템</SectionTitle>
-          <div className="grid md:grid-cols-2 gap-8">
-            {[0, 1, 2, 3].map(i => (
-              <div
-                key={i}
-                className="p-10 rounded-xl transition-all duration-300 hover:-translate-y-3"
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  minHeight: '300px',
-                  borderTop: '3px solid #D4A96A',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = '0 24px 60px rgba(0,0,0,0.35), 0 8px 20px rgba(212,169,106,0.2)';
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.15)';
-                }}
-              />
+          <div>
+            {[
+              {
+                subtitle: '매주 새롭게 제작되는 맞춤형 학습 콘텐츠',
+                title: '직접 제작하는 주간 학습 교재',
+                desc: '출제 경향과 학생들의 학습 상황을 반영하여 직접 제작한 교재를 제공합니다. 단순한 문제 풀이가 아닌, 시험에 필요한 핵심 내용을 체계적으로 학습할 수 있도록 설계합니다.',
+              },
+              {
+                subtitle: '질문을 미루지 않는 즉각적인 피드백',
+                title: '실시간 질의응답 관리',
+                desc: '학생들의 질문에 직접 답변하며 학습 공백을 최소화합니다. 작은 의문도 바로 해결하여 이해를 완성하고, 혼자 고민하는 시간을 줄여 학습 효율을 높입니다.',
+              },
+              {
+                subtitle: '이수진 영어만의 자체 제작 학습 플랫폼',
+                title: '독자 개발 학습 시스템',
+                desc: '단어·구문 암기를 위한 전용 웹앱과 핵심 내용을 압축한 핸디북을 제공합니다. 다른 학원에서는 경험할 수 없는 자체 개발 학습 시스템으로 반복 학습과 암기를 효과적으로 관리합니다.',
+              },
+              {
+                subtitle: '끝까지 책임지는 밀착 학습 관리',
+                title: '1:1 학습 관리 및 소통',
+                desc: '학생과 직접 소통하며 진도, 과제, 학습 습관을 지속적으로 점검합니다. 단순히 수업만 하는 것이 아니라 목표 달성까지 함께 관리하는 책임형 학습 시스템을 운영합니다.',
+              },
+            ].map(({ subtitle, title, desc }, i) => (
+              <div key={title}>
+                {i > 0 && (
+                  <div className="h-px" style={{ backgroundColor: '#D4A96A', opacity: 0.2 }} />
+                )}
+                <div className="grid md:grid-cols-5 gap-4 md:gap-16 py-12">
+                  <div className="md:col-span-2 flex flex-col justify-center">
+                    <p className="text-xs tracking-[0.2em] mb-3 italic" style={{ color: '#D4A96A' }}>
+                      {subtitle}
+                    </p>
+                    <h3 className="text-xl font-semibold tracking-wide leading-snug" style={{ color: '#52412F' }}>
+                      {title}
+                    </h3>
+                  </div>
+                  <div className="md:col-span-3 flex items-center">
+                    <p className="text-sm md:text-base leading-loose tracking-wide" style={{ color: '#52412F', opacity: 0.7 }}>
+                      {desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
