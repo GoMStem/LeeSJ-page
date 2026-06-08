@@ -220,15 +220,18 @@ export default function Home() {
                 )}
                 <div className="grid md:grid-cols-5 gap-4 md:gap-16 py-12">
                   <div className="md:col-span-2 flex flex-col justify-center">
-                    <p className="text-xs tracking-[0.2em] mb-3 italic" style={{ color: '#D4A96A' }}>
-                      {subtitle}
-                    </p>
-                    <h3 className="text-xl font-semibold tracking-wide leading-snug" style={{ color: '#52412F' }}>
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#D4A96A' }} />
+                      <p className="text-sm font-medium tracking-wide break-keep" style={{ color: '#D4A96A' }}>
+                        {subtitle}
+                      </p>
+                    </div>
+                    <h3 className="text-xl font-semibold tracking-wide leading-snug break-keep" style={{ color: '#52412F' }}>
                       {title}
                     </h3>
                   </div>
                   <div className="md:col-span-3 flex items-center">
-                    <p className="text-sm md:text-base leading-loose tracking-wide" style={{ color: '#52412F', opacity: 0.7 }}>
+                    <p className="text-sm md:text-base leading-loose tracking-wide break-keep" style={{ color: '#52412F', opacity: 0.7 }}>
                       {desc}
                     </p>
                   </div>
