@@ -4,34 +4,66 @@ import { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Clock, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
-const FEEDBACK_ITEMS = [
+type FeedbackAnswer = { tags: string[]; subtitle: string; content: string };
+type FeedbackItem = { q: string; answers: FeedbackAnswer[] };
+
+const FEEDBACK_ITEMS: FeedbackItem[] = [
   {
-    q: '예시 질문 1',
+    q: '이수진 수업은요..',
     answers: [
-      '첫 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
-      '두 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
-      '세 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
+      {
+        tags: ['#성적향상', '#효율적인학습'],
+        subtitle: '4등급에서 1등급으로 성적 상승, 타 학원과 확실히 다른 체계적인 수업',
+        content: '이수진 선생님 수업을 처음 들었는데 4등급에서 1등급으로 올랐습니다! 다른 학원들과 달리 수업에 체계가 잡혀 있어서, 선생님이 이끄시는 대로만 잘 따라가면 시험 기간에 영어에 많은 시간을 투자하지 않고도 좋은 성적을 기대할 수 있습니다.',
+      },
+      {
+        tags: ['#북일고내신', '#독보적자료'],
+        subtitle: '북일고 내신 완벽 분석, 자료를 다 풀면 1등급이 안 나오는 게 이상할 정도입니다.',
+        content: '학교 선생님의 출제 스타일에 맞춰 비슷한 문제를 많이 만들어주십니다. 북일고 영어 내신 문제와 비슷한 유사 문제가 너무 많아서, 주시는 자료를 다 풀면 1등급이 안 나오는 게 이상할 정도로 퀄리티가 좋습니다. 특히 지문 분석을 워낙 잘 해주셔서 강의를 한 번만 들어도 거의 다 이해할 수 있습니다!',
+      },
+      {
+        tags: ['#강의력', '#실시간질문답변'],
+        subtitle: '높은 문제 적중률과 명쾌한 설명, 질문에 대한 꼼꼼한 즉각 답변까지',
+        content: '풍부한 문제와 높은 적중률 덕분에 추천하고 싶은 수업입니다. 이해하기 어렵고 복잡한 내용도 여러 예시를 들어 쉽게 설명해 주시고, 타 수업에 비해 지문의 내용을 더 명확하고 직접적으로 이해할 수 있습니다. 무엇보다 질문을 했을 때 바로바로 꼼꼼하게 답변해 주시는 점이 정말 좋습니다!',
+      },
+      {
+        tags: ['#학생중심', '#감동적인밀착관리'],
+        subtitle: '"영어의 Goat" 학생을 위해 이정도로 헌신하시는 선생님은 처음입니다.',
+        content: '한 해 동안 4번의 영어 시험을 보며 1학기 중간고사를 제외하고 모두 1등급을 받았습니다. 이수진 선생님은 그 어떤 분보다도 학생을 위해 열심히 노력해 주십니다! 다른 학원도 다녀봤지만, 사소하게 느껴질 수 있는 내용들도 반톡으로 계속 챙겨주시고, 특별히 부탁드리지 않았는데도 시험 기간에 필요한 자료를 먼저 올려주시는 분은 없었습니다. 다음에도 꼭 다시 수강할 생각이고 주변에도 선생님의 수업을 추천하고 싶습니다.',
+      },
     ],
   },
   {
     q: '예시 질문 2',
     answers: [
-      '첫 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
-      '두 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
+      { tags: ['#예시태그'], subtitle: '예시 부제목', content: '내용 전달 후 교체 예정입니다.' },
     ],
   },
   {
     q: '예시 질문 3',
     answers: [
-      '첫 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
-      '두 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
-      '세 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
+      { tags: ['#예시태그'], subtitle: '예시 부제목', content: '내용 전달 후 교체 예정입니다.' },
     ],
   },
 ];
 
 function FeedbackSection() {
   const [activeQ, setActiveQ] = useState(0);
+  const [expanded, setExpanded] = useState<Set<number>>(new Set());
+
+  const switchQ = (qi: number) => {
+    setActiveQ(qi);
+    setExpanded(new Set());
+  };
+
+  const toggle = (i: number) => {
+    setExpanded(prev => {
+      const next = new Set(prev);
+      next.has(i) ? next.delete(i) : next.add(i);
+      return next;
+    });
+  };
+
   const current = FEEDBACK_ITEMS[activeQ];
 
   return (
@@ -44,7 +76,7 @@ function FeedbackSection() {
           {FEEDBACK_ITEMS.map(({ q }, qi) => (
             <button
               key={qi}
-              onClick={() => setActiveQ(qi)}
+              onClick={() => switchQ(qi)}
               className="px-5 py-2.5 text-sm font-medium tracking-wide transition-all cursor-pointer break-keep"
               style={{
                 backgroundColor: activeQ === qi ? '#52412F' : 'transparent',
@@ -57,9 +89,9 @@ function FeedbackSection() {
           ))}
         </div>
 
-        {/* Q 왼쪽 / 답변들 오른쪽 */}
+        {/* Q 왼쪽 / 카드 오른쪽 */}
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
-          {/* 왼쪽: 질문 */}
+          {/* 왼쪽: 질문 고정 */}
           <div className="md:sticky md:top-28">
             <span
               className="inline-block text-xs font-semibold tracking-widest px-2.5 py-1 rounded-full mb-4"
@@ -67,19 +99,55 @@ function FeedbackSection() {
             >
               Q
             </span>
-            <p className="text-lg font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>
+            <p className="text-xl font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>
               {current.q}
             </p>
           </div>
 
-          {/* 오른쪽: 답변 목록 */}
-          <div className="text-right space-y-8">
-            {current.answers.map((a, i) => (
-              <div key={i}>
-                {i > 0 && <div className="h-px mb-8" style={{ backgroundColor: '#D4A96A', opacity: 0.15 }} />}
-                <p className="text-sm md:text-base leading-loose break-keep" style={{ color: '#52412F', opacity: 0.65 }}>
-                  {a}
-                </p>
+          {/* 오른쪽: 아코디언 카드 */}
+          <div className="space-y-3">
+            {current.answers.map(({ tags, subtitle, content }, i) => (
+              <div
+                key={i}
+                className="rounded-xl overflow-hidden cursor-pointer"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  borderTop: '2px solid #D4A96A',
+                  boxShadow: '0 2px 12px rgba(82,65,47,0.08)',
+                }}
+                onClick={() => toggle(i)}
+              >
+                <div className="px-6 py-5">
+                  {/* 해시태그 */}
+                  <div className="flex flex-wrap gap-1.5 mb-2.5">
+                    {tags.map(tag => (
+                      <span key={tag} className="text-xs font-medium tracking-wide" style={{ color: '#D4A96A' }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  {/* 부제 + 토글 아이콘 */}
+                  <div className="flex items-start justify-between gap-4">
+                    <p className="text-sm font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>
+                      {subtitle}
+                    </p>
+                    <span
+                      className="text-lg flex-shrink-0 transition-transform duration-200 select-none"
+                      style={{
+                        color: '#D4A96A',
+                        transform: expanded.has(i) ? 'rotate(45deg)' : 'rotate(0deg)',
+                      }}
+                    >
+                      +
+                    </span>
+                  </div>
+                  {/* 본문 (펼쳐지면 표시) */}
+                  {expanded.has(i) && (
+                    <p className="mt-4 text-sm leading-loose break-keep border-t pt-4" style={{ color: '#52412F', opacity: 0.65, borderColor: '#E8DDD4' }}>
+                      {content}
+                    </p>
+                  )}
+                </div>
               </div>
             ))}
           </div>
