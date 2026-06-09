@@ -106,7 +106,7 @@ function FeedbackSection() {
             <div
               key={i}
               onClick={() => toggle(i)}
-              className="cursor-pointer transition-all duration-200 p-7"
+              className="rounded-lg cursor-pointer transition-all duration-200 p-7"
               style={{
                 backgroundColor: '#FFFFFF',
                 borderLeft: '3px solid #D4A96A',
