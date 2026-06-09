@@ -106,25 +106,25 @@ function FeedbackSection() {
             <div
               key={i}
               onClick={() => toggle(i)}
-              className="rounded-xl cursor-pointer transition-all duration-200 p-8"
+              className="cursor-pointer transition-all duration-200 p-7"
               style={{
-                backgroundColor: '#52412F',
-                border: `1px solid ${expanded.has(i) ? 'rgba(212,169,106,0.6)' : 'rgba(212,169,106,0.2)'}`,
+                backgroundColor: '#FFFFFF',
+                borderLeft: '3px solid #D4A96A',
                 boxShadow: expanded.has(i)
-                  ? '0 8px 32px rgba(82,65,47,0.35)'
-                  : '0 4px 16px rgba(82,65,47,0.15)',
+                  ? '0 6px 24px rgba(82,65,47,0.12)'
+                  : '0 2px 10px rgba(82,65,47,0.06)',
               }}
             >
               {/* 해시태그 */}
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-3">
                 {tags.map(tag => (
                   <span
                     key={tag}
-                    className="text-xs font-medium tracking-wide px-2.5 py-1 rounded-full"
+                    className="text-xs font-medium tracking-wide px-2.5 py-0.5"
                     style={{
                       color: '#D4A96A',
-                      border: '1px solid rgba(212,169,106,0.45)',
-                      backgroundColor: 'rgba(212,169,106,0.08)',
+                      border: '1px solid rgba(212,169,106,0.4)',
+                      backgroundColor: 'rgba(212,169,106,0.07)',
                     }}
                   >
                     {tag}
@@ -133,7 +133,7 @@ function FeedbackSection() {
               </div>
               {/* 부제 + 화살표 */}
               <div className="flex items-start justify-between gap-4">
-                <p className="text-sm font-semibold leading-snug break-keep" style={{ color: '#FFFFFF' }}>
+                <p className="text-sm font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>
                   {subtitle}
                 </p>
                 <ChevronDown
@@ -146,7 +146,7 @@ function FeedbackSection() {
               </div>
               {/* 본문 */}
               {expanded.has(i) && (
-                <p className="mt-5 text-sm leading-loose break-keep pt-5" style={{ color: 'rgba(255,255,255,0.65)', borderTop: '1px solid rgba(212,169,106,0.2)' }}>
+                <p className="mt-4 text-sm leading-loose break-keep pt-4" style={{ color: '#52412F', opacity: 0.65, borderTop: '1px solid #E8DDD4' }}>
                   {content}
                 </p>
               )}
