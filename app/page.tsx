@@ -280,10 +280,51 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Section 2 */}
-      <section className="py-28 px-6" style={{ backgroundColor: '#52412F', minHeight: '500px' }}>
-        <div className="max-w-6xl mx-auto">
-          <SectionTitle light>내용구상중</SectionTitle>
+      {/* Feedback Section */}
+      <section className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
+        <div className="max-w-3xl mx-auto">
+          <SectionTitle>수강생의 목소리</SectionTitle>
+
+          <div>
+            {[
+              {
+                q: '예시 질문 1 — 수업에서 가장 도움이 된 점이 무엇인가요?',
+                a: '학생 피드백 내용이 들어갈 자리입니다. 실제 피드백 전달 후 교체 예정입니다.',
+              },
+              {
+                q: '예시 질문 2 — 성적이 얼마나 올랐나요?',
+                a: '학생 피드백 내용이 들어갈 자리입니다. 실제 피드백 전달 후 교체 예정입니다.',
+              },
+              {
+                q: '예시 질문 3 — 다른 학원과 어떤 점이 달랐나요?',
+                a: '학생 피드백 내용이 들어갈 자리입니다. 실제 피드백 전달 후 교체 예정입니다.',
+              },
+              {
+                q: '예시 질문 4 — 어떤 학생에게 추천하고 싶나요?',
+                a: '학생 피드백 내용이 들어갈 자리입니다. 실제 피드백 전달 후 교체 예정입니다.',
+              },
+            ].map(({ q, a }, i) => (
+              <div key={i}>
+                {i > 0 && (
+                  <div className="h-px" style={{ backgroundColor: '#D4A96A', opacity: 0.2 }} />
+                )}
+                <div className="py-10 grid md:grid-cols-12 gap-4 md:gap-10">
+                  <div className="md:col-span-5">
+                    <span
+                      className="inline-block text-xs font-semibold tracking-widest px-2.5 py-1 rounded-full mb-4"
+                      style={{ backgroundColor: '#52412F', color: '#D4A96A' }}
+                    >
+                      Q
+                    </span>
+                    <p className="text-base font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>{q}</p>
+                  </div>
+                  <div className="md:col-span-7 flex items-center">
+                    <p className="text-sm md:text-base leading-loose break-keep" style={{ color: '#52412F', opacity: 0.65 }}>{a}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
