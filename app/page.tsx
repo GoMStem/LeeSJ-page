@@ -32,18 +32,7 @@ const FEEDBACK_ITEMS = [
 
 function FeedbackSection() {
   const [activeQ, setActiveQ] = useState(0);
-  const [answerIdx, setAnswerIdx] = useState(0);
-
-  const switchQ = (qi: number) => {
-    setActiveQ(qi);
-    setAnswerIdx(0);
-  };
-
   const current = FEEDBACK_ITEMS[activeQ];
-
-  const go = (dir: 1 | -1) => {
-    setAnswerIdx(prev => (prev + dir + current.answers.length) % current.answers.length);
-  };
 
   return (
     <section className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
@@ -55,7 +44,7 @@ function FeedbackSection() {
           {FEEDBACK_ITEMS.map(({ q }, qi) => (
             <button
               key={qi}
-              onClick={() => switchQ(qi)}
+              onClick={() => setActiveQ(qi)}
               className="px-5 py-2.5 text-sm font-medium tracking-wide transition-all cursor-pointer break-keep"
               style={{
                 backgroundColor: activeQ === qi ? '#52412F' : 'transparent',
@@ -68,10 +57,10 @@ function FeedbackSection() {
           ))}
         </div>
 
-        {/* Q 왼쪽 / A 오른쪽 */}
+        {/* Q 왼쪽 / 답변들 오른쪽 */}
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
           {/* 왼쪽: 질문 */}
-          <div>
+          <div className="md:sticky md:top-28">
             <span
               className="inline-block text-xs font-semibold tracking-widest px-2.5 py-1 rounded-full mb-4"
               style={{ backgroundColor: '#52412F', color: '#D4A96A' }}
@@ -83,37 +72,16 @@ function FeedbackSection() {
             </p>
           </div>
 
-          {/* 오른쪽: 답변 */}
-          <div className="text-right">
-            <p
-              className="text-sm md:text-base leading-loose break-keep min-h-[7rem] mb-6"
-              style={{ color: '#52412F', opacity: 0.65 }}
-            >
-              {current.answers[answerIdx]}
-            </p>
-            <div className="flex items-center justify-end gap-4">
-              <button
-                onClick={() => go(-1)}
-                className="w-8 h-8 rounded-full flex items-center justify-center transition-colors cursor-pointer"
-                style={{ border: '1px solid #D4A96A', color: '#D4A96A' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#D4A96A'; (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = '#D4A96A'; }}
-              >
-                ‹
-              </button>
-              <span className="text-xs tracking-widest" style={{ color: '#D4A96A' }}>
-                {answerIdx + 1} / {current.answers.length}
-              </span>
-              <button
-                onClick={() => go(1)}
-                className="w-8 h-8 rounded-full flex items-center justify-center transition-colors cursor-pointer"
-                style={{ border: '1px solid #D4A96A', color: '#D4A96A' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#D4A96A'; (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = '#D4A96A'; }}
-              >
-                ›
-              </button>
-            </div>
+          {/* 오른쪽: 답변 목록 */}
+          <div className="text-right space-y-8">
+            {current.answers.map((a, i) => (
+              <div key={i}>
+                {i > 0 && <div className="h-px mb-8" style={{ backgroundColor: '#D4A96A', opacity: 0.15 }} />}
+                <p className="text-sm md:text-base leading-loose break-keep" style={{ color: '#52412F', opacity: 0.65 }}>
+                  {a}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
