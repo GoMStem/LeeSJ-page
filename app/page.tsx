@@ -101,7 +101,7 @@ function FeedbackSection() {
         </div>
 
         {/* 카드 그리드 */}
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid md:grid-cols-2 gap-5 items-start">
           {current.answers.map(({ tags, subtitle, content }, i) => (
             <div
               key={i}
