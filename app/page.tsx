@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { MapPin, Phone, Mail, Clock, Menu, X } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Menu, X, ChevronDown } from 'lucide-react';
 import Image from 'next/image';
 
 type FeedbackAnswer = { tags: string[]; subtitle: string; content: string };
@@ -68,11 +68,11 @@ function FeedbackSection() {
 
   return (
     <section className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <SectionTitle>수강생의 목소리</SectionTitle>
 
         {/* 질문 선택 버튼 */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
           {FEEDBACK_ITEMS.map(({ q }, qi) => (
             <button
               key={qi}
@@ -89,68 +89,61 @@ function FeedbackSection() {
           ))}
         </div>
 
-        {/* Q 왼쪽 / 카드 오른쪽 */}
-        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
-          {/* 왼쪽: 질문 고정 */}
-          <div className="md:sticky md:top-28">
-            <span
-              className="inline-block text-xs font-semibold tracking-widest px-2.5 py-1 rounded-full mb-4"
-              style={{ backgroundColor: '#52412F', color: '#D4A96A' }}
-            >
-              Q
-            </span>
-            <p className="text-xl font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>
-              {current.q}
-            </p>
-          </div>
+        {/* 질문 텍스트 */}
+        <div className="flex items-center gap-3 mb-10">
+          <span
+            className="inline-block text-xs font-semibold tracking-widest px-2.5 py-1 rounded-full flex-shrink-0"
+            style={{ backgroundColor: '#52412F', color: '#D4A96A' }}
+          >
+            Q
+          </span>
+          <p className="text-lg font-semibold break-keep" style={{ color: '#52412F' }}>{current.q}</p>
+        </div>
 
-          {/* 오른쪽: 아코디언 카드 */}
-          <div className="space-y-3">
-            {current.answers.map(({ tags, subtitle, content }, i) => (
-              <div
-                key={i}
-                className="rounded-xl overflow-hidden cursor-pointer"
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  borderTop: '2px solid #D4A96A',
-                  boxShadow: '0 2px 12px rgba(82,65,47,0.08)',
-                }}
-                onClick={() => toggle(i)}
-              >
-                <div className="px-6 py-5">
-                  {/* 해시태그 */}
-                  <div className="flex flex-wrap gap-1.5 mb-2.5">
-                    {tags.map(tag => (
-                      <span key={tag} className="text-xs font-medium tracking-wide" style={{ color: '#D4A96A' }}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  {/* 부제 + 토글 아이콘 */}
-                  <div className="flex items-start justify-between gap-4">
-                    <p className="text-sm font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>
-                      {subtitle}
-                    </p>
-                    <span
-                      className="text-lg flex-shrink-0 transition-transform duration-200 select-none"
-                      style={{
-                        color: '#D4A96A',
-                        transform: expanded.has(i) ? 'rotate(45deg)' : 'rotate(0deg)',
-                      }}
-                    >
-                      +
-                    </span>
-                  </div>
-                  {/* 본문 (펼쳐지면 표시) */}
-                  {expanded.has(i) && (
-                    <p className="mt-4 text-sm leading-loose break-keep border-t pt-4" style={{ color: '#52412F', opacity: 0.65, borderColor: '#E8DDD4' }}>
-                      {content}
-                    </p>
-                  )}
-                </div>
+        {/* 카드 그리드 */}
+        <div className="grid md:grid-cols-2 gap-5">
+          {current.answers.map(({ tags, subtitle, content }, i) => (
+            <div
+              key={i}
+              onClick={() => toggle(i)}
+              className="rounded-xl cursor-pointer transition-shadow duration-200 p-8"
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderTop: '3px solid #D4A96A',
+                boxShadow: expanded.has(i)
+                  ? '0 8px 32px rgba(82,65,47,0.15)'
+                  : '0 4px 16px rgba(82,65,47,0.08)',
+              }}
+            >
+              {/* 해시태그 */}
+              <div className="flex flex-wrap gap-2 mb-3">
+                {tags.map(tag => (
+                  <span key={tag} className="text-xs font-medium tracking-wide" style={{ color: '#D4A96A' }}>
+                    {tag}
+                  </span>
+                ))}
               </div>
-            ))}
-          </div>
+              {/* 부제 + 시보 아이콘 */}
+              <div className="flex items-start justify-between gap-4">
+                <p className="text-sm font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>
+                  {subtitle}
+                </p>
+                <ChevronDown
+                  className="w-4 h-4 flex-shrink-0 mt-0.5 transition-transform duration-300"
+                  style={{
+                    color: '#D4A96A',
+                    transform: expanded.has(i) ? 'rotate(180deg)' : 'rotate(0deg)',
+                  }}
+                />
+              </div>
+              {/* 본문 */}
+              {expanded.has(i) && (
+                <p className="mt-5 text-sm leading-loose break-keep pt-5" style={{ color: '#52412F', opacity: 0.65, borderTop: '1px solid #E8DDD4' }}>
+                  {content}
+                </p>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </section>
