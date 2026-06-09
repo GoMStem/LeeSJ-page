@@ -67,9 +67,9 @@ function FeedbackSection() {
   const current = FEEDBACK_ITEMS[activeQ];
 
   return (
-    <section className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
+    <section className="py-28 px-6" style={{ backgroundColor: '#52412F' }}>
       <div className="max-w-5xl mx-auto">
-        <SectionTitle>수강생의 목소리</SectionTitle>
+        <SectionTitle light>수강생의 목소리</SectionTitle>
 
         {/* 질문 선택 버튼 */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
@@ -79,9 +79,9 @@ function FeedbackSection() {
               onClick={() => switchQ(qi)}
               className="px-5 py-2.5 text-sm font-medium tracking-wide transition-all cursor-pointer break-keep"
               style={{
-                backgroundColor: activeQ === qi ? '#52412F' : 'transparent',
-                color: activeQ === qi ? '#D4A96A' : '#52412F',
-                border: '1px solid #52412F',
+                backgroundColor: activeQ === qi ? '#D4A96A' : 'transparent',
+                color: activeQ === qi ? '#FFFFFF' : '#D4A96A',
+                border: '1px solid #D4A96A',
               }}
             >
               {q}
@@ -93,11 +93,11 @@ function FeedbackSection() {
         <div className="flex items-center gap-3 mb-10">
           <span
             className="inline-block text-xs font-semibold tracking-widest px-2.5 py-1 rounded-full flex-shrink-0"
-            style={{ backgroundColor: '#52412F', color: '#D4A96A' }}
+            style={{ backgroundColor: '#D4A96A', color: '#FFFFFF' }}
           >
             Q
           </span>
-          <p className="text-lg font-semibold break-keep" style={{ color: '#52412F' }}>{current.q}</p>
+          <p className="text-lg font-semibold break-keep" style={{ color: '#FFFFFF' }}>{current.q}</p>
         </div>
 
         {/* 카드 그리드 */}
