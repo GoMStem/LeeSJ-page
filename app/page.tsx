@@ -4,6 +4,107 @@ import { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Clock, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
+const FEEDBACK_ITEMS = [
+  {
+    q: '예시 질문 1',
+    answers: [
+      '첫 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
+      '두 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
+      '세 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
+    ],
+  },
+  {
+    q: '예시 질문 2',
+    answers: [
+      '첫 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
+      '두 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
+    ],
+  },
+  {
+    q: '예시 질문 3',
+    answers: [
+      '첫 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
+      '두 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
+      '세 번째 답변 내용이 들어갑니다. 실제 피드백 전달 후 교체 예정입니다.',
+    ],
+  },
+];
+
+function FeedbackSection() {
+  const [indices, setIndices] = useState([0, 0, 0]);
+
+  const go = (qi: number, dir: 1 | -1) => {
+    setIndices(prev => {
+      const next = [...prev];
+      const len = FEEDBACK_ITEMS[qi].answers.length;
+      next[qi] = (prev[qi] + dir + len) % len;
+      return next;
+    });
+  };
+
+  return (
+    <section className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
+      <div className="max-w-3xl mx-auto">
+        <SectionTitle>수강생의 목소리</SectionTitle>
+        <div>
+          {FEEDBACK_ITEMS.map(({ q, answers }, qi) => (
+            <div key={qi}>
+              {qi > 0 && (
+                <div className="h-px" style={{ backgroundColor: '#D4A96A', opacity: 0.2 }} />
+              )}
+              <div className="py-10">
+                {/* 질문 */}
+                <div className="flex items-start gap-3 mb-6">
+                  <span
+                    className="inline-block text-xs font-semibold tracking-widest px-2.5 py-1 rounded-full flex-shrink-0 mt-0.5"
+                    style={{ backgroundColor: '#52412F', color: '#D4A96A' }}
+                  >
+                    Q
+                  </span>
+                  <p className="text-base font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>{q}</p>
+                </div>
+
+                {/* 답변 + 네비게이션 */}
+                <div className="pl-1">
+                  <p
+                    className="text-sm md:text-base leading-loose break-keep min-h-[5rem] mb-5"
+                    style={{ color: '#52412F', opacity: 0.65 }}
+                  >
+                    {answers[indices[qi]]}
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={() => go(qi, -1)}
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                      style={{ border: '1px solid #D4A96A', color: '#D4A96A' }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#D4A96A'; (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF'; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = '#D4A96A'; }}
+                    >
+                      ‹
+                    </button>
+                    <span className="text-xs tracking-widest" style={{ color: '#D4A96A' }}>
+                      {indices[qi] + 1} / {answers.length}
+                    </span>
+                    <button
+                      onClick={() => go(qi, 1)}
+                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
+                      style={{ border: '1px solid #D4A96A', color: '#D4A96A' }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#D4A96A'; (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF'; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = '#D4A96A'; }}
+                    >
+                      ›
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function SectionTitle({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
   return (
     <div className="text-center mb-16">
@@ -281,52 +382,7 @@ export default function Home() {
       </section>
 
       {/* Feedback Section */}
-      <section className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
-        <div className="max-w-3xl mx-auto">
-          <SectionTitle>수강생의 목소리</SectionTitle>
-
-          <div>
-            {[
-              {
-                q: '예시 질문 1 — 수업에서 가장 도움이 된 점이 무엇인가요?',
-                a: '학생 피드백 내용이 들어갈 자리입니다. 실제 피드백 전달 후 교체 예정입니다.',
-              },
-              {
-                q: '예시 질문 2 — 성적이 얼마나 올랐나요?',
-                a: '학생 피드백 내용이 들어갈 자리입니다. 실제 피드백 전달 후 교체 예정입니다.',
-              },
-              {
-                q: '예시 질문 3 — 다른 학원과 어떤 점이 달랐나요?',
-                a: '학생 피드백 내용이 들어갈 자리입니다. 실제 피드백 전달 후 교체 예정입니다.',
-              },
-              {
-                q: '예시 질문 4 — 어떤 학생에게 추천하고 싶나요?',
-                a: '학생 피드백 내용이 들어갈 자리입니다. 실제 피드백 전달 후 교체 예정입니다.',
-              },
-            ].map(({ q, a }, i) => (
-              <div key={i}>
-                {i > 0 && (
-                  <div className="h-px" style={{ backgroundColor: '#D4A96A', opacity: 0.2 }} />
-                )}
-                <div className="py-10 grid md:grid-cols-12 gap-4 md:gap-10">
-                  <div className="md:col-span-5">
-                    <span
-                      className="inline-block text-xs font-semibold tracking-widest px-2.5 py-1 rounded-full mb-4"
-                      style={{ backgroundColor: '#52412F', color: '#D4A96A' }}
-                    >
-                      Q
-                    </span>
-                    <p className="text-base font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>{q}</p>
-                  </div>
-                  <div className="md:col-span-7 flex items-center">
-                    <p className="text-sm md:text-base leading-loose break-keep" style={{ color: '#52412F', opacity: 0.65 }}>{a}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeedbackSection />
 
       {/* Contact Section */}
       <section id="contact" className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
