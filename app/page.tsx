@@ -31,74 +31,90 @@ const FEEDBACK_ITEMS = [
 ];
 
 function FeedbackSection() {
-  const [indices, setIndices] = useState([0, 0, 0]);
+  const [activeQ, setActiveQ] = useState(0);
+  const [answerIdx, setAnswerIdx] = useState(0);
 
-  const go = (qi: number, dir: 1 | -1) => {
-    setIndices(prev => {
-      const next = [...prev];
-      const len = FEEDBACK_ITEMS[qi].answers.length;
-      next[qi] = (prev[qi] + dir + len) % len;
-      return next;
-    });
+  const switchQ = (qi: number) => {
+    setActiveQ(qi);
+    setAnswerIdx(0);
+  };
+
+  const current = FEEDBACK_ITEMS[activeQ];
+
+  const go = (dir: 1 | -1) => {
+    setAnswerIdx(prev => (prev + dir + current.answers.length) % current.answers.length);
   };
 
   return (
     <section className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <SectionTitle>수강생의 목소리</SectionTitle>
-        <div>
-          {FEEDBACK_ITEMS.map(({ q, answers }, qi) => (
-            <div key={qi}>
-              {qi > 0 && (
-                <div className="h-px" style={{ backgroundColor: '#D4A96A', opacity: 0.2 }} />
-              )}
-              <div className="py-10">
-                {/* 질문 */}
-                <div className="flex items-start gap-3 mb-6">
-                  <span
-                    className="inline-block text-xs font-semibold tracking-widest px-2.5 py-1 rounded-full flex-shrink-0 mt-0.5"
-                    style={{ backgroundColor: '#52412F', color: '#D4A96A' }}
-                  >
-                    Q
-                  </span>
-                  <p className="text-base font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>{q}</p>
-                </div>
 
-                {/* 답변 + 네비게이션 */}
-                <div className="pl-1">
-                  <p
-                    className="text-sm md:text-base leading-loose break-keep min-h-[5rem] mb-5"
-                    style={{ color: '#52412F', opacity: 0.65 }}
-                  >
-                    {answers[indices[qi]]}
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <button
-                      onClick={() => go(qi, -1)}
-                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                      style={{ border: '1px solid #D4A96A', color: '#D4A96A' }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#D4A96A'; (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF'; }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = '#D4A96A'; }}
-                    >
-                      ‹
-                    </button>
-                    <span className="text-xs tracking-widest" style={{ color: '#D4A96A' }}>
-                      {indices[qi] + 1} / {answers.length}
-                    </span>
-                    <button
-                      onClick={() => go(qi, 1)}
-                      className="w-8 h-8 rounded-full flex items-center justify-center transition-colors"
-                      style={{ border: '1px solid #D4A96A', color: '#D4A96A' }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#D4A96A'; (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF'; }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = '#D4A96A'; }}
-                    >
-                      ›
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+        {/* 질문 선택 버튼 */}
+        <div className="flex flex-wrap justify-center gap-3 mb-16">
+          {FEEDBACK_ITEMS.map(({ q }, qi) => (
+            <button
+              key={qi}
+              onClick={() => switchQ(qi)}
+              className="px-5 py-2.5 text-sm font-medium tracking-wide transition-all cursor-pointer break-keep"
+              style={{
+                backgroundColor: activeQ === qi ? '#52412F' : 'transparent',
+                color: activeQ === qi ? '#D4A96A' : '#52412F',
+                border: '1px solid #52412F',
+              }}
+            >
+              {q}
+            </button>
           ))}
+        </div>
+
+        {/* Q 왼쪽 / A 오른쪽 */}
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
+          {/* 왼쪽: 질문 */}
+          <div>
+            <span
+              className="inline-block text-xs font-semibold tracking-widest px-2.5 py-1 rounded-full mb-4"
+              style={{ backgroundColor: '#52412F', color: '#D4A96A' }}
+            >
+              Q
+            </span>
+            <p className="text-lg font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>
+              {current.q}
+            </p>
+          </div>
+
+          {/* 오른쪽: 답변 */}
+          <div className="text-right">
+            <p
+              className="text-sm md:text-base leading-loose break-keep min-h-[7rem] mb-6"
+              style={{ color: '#52412F', opacity: 0.65 }}
+            >
+              {current.answers[answerIdx]}
+            </p>
+            <div className="flex items-center justify-end gap-4">
+              <button
+                onClick={() => go(-1)}
+                className="w-8 h-8 rounded-full flex items-center justify-center transition-colors cursor-pointer"
+                style={{ border: '1px solid #D4A96A', color: '#D4A96A' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#D4A96A'; (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = '#D4A96A'; }}
+              >
+                ‹
+              </button>
+              <span className="text-xs tracking-widest" style={{ color: '#D4A96A' }}>
+                {answerIdx + 1} / {current.answers.length}
+              </span>
+              <button
+                onClick={() => go(1)}
+                className="w-8 h-8 rounded-full flex items-center justify-center transition-colors cursor-pointer"
+                style={{ border: '1px solid #D4A96A', color: '#D4A96A' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#D4A96A'; (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent'; (e.currentTarget as HTMLButtonElement).style.color = '#D4A96A'; }}
+              >
+                ›
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
