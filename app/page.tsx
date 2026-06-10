@@ -84,20 +84,19 @@ function FeedbackSection() {
       <div className="max-w-5xl mx-auto">
         <SectionTitle light>수강생의 목소리</SectionTitle>
 
-        {/* 질문 선택 버튼 */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {FEEDBACK_ITEMS.map(({ q }, qi) => (
+        {/* 질문 선택 탭 */}
+        <div className="flex items-center justify-center gap-0 mb-12">
+          {['질문 1', '질문 2'].map((label, qi) => (
             <button
               key={qi}
               onClick={() => switchQ(qi)}
-              className="px-5 py-2.5 text-sm font-medium tracking-wide transition-all cursor-pointer break-keep"
-              style={{
-                backgroundColor: activeQ === qi ? '#D4A96A' : 'transparent',
-                color: activeQ === qi ? '#FFFFFF' : '#D4A96A',
-                border: '1px solid #D4A96A',
-              }}
+              className="relative px-8 py-3 text-sm font-medium tracking-widest transition-all duration-200 cursor-pointer"
+              style={{ color: activeQ === qi ? '#FFFFFF' : 'rgba(255,255,255,0.35)' }}
             >
-              {q}
+              {label}
+              {activeQ === qi && (
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5" style={{ backgroundColor: '#D4A96A' }} />
+              )}
             </button>
           ))}
         </div>
