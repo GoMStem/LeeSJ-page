@@ -85,20 +85,22 @@ function FeedbackSection() {
         <SectionTitle light>수강생의 목소리</SectionTitle>
 
         {/* 질문 선택 탭 */}
-        <div className="flex items-center justify-center gap-3 mb-12">
+        <div
+          className="inline-flex mx-auto mb-12 p-1 rounded-full"
+          style={{
+            backgroundColor: 'rgba(212,169,106,0.12)',
+            border: '1px solid rgba(212,169,106,0.25)',
+            display: 'flex',
+          }}
+        >
           {['질문 1', '질문 2'].map((label, qi) => (
             <button
               key={qi}
               onClick={() => switchQ(qi)}
-              className="px-7 py-2.5 text-sm font-semibold tracking-widest rounded-full transition-all duration-200 cursor-pointer"
+              className="px-7 py-2 text-sm font-medium tracking-widest rounded-full transition-all duration-250 cursor-pointer"
               style={{
-                background: activeQ === qi
-                  ? 'linear-gradient(135deg, #DDB870 0%, #C4923E 100%)'
-                  : 'rgba(255,255,255,0.06)',
-                color: activeQ === qi ? '#3D2B0F' : 'rgba(255,255,255,0.45)',
-                border: activeQ === qi ? '1px solid rgba(221,184,112,0.6)' : '1px solid rgba(255,255,255,0.15)',
-                boxShadow: activeQ === qi ? '0 4px 18px rgba(212,169,106,0.4), inset 0 1px 0 rgba(255,255,255,0.25)' : 'none',
-                letterSpacing: '0.12em',
+                backgroundColor: activeQ === qi ? 'rgba(212,169,106,0.3)' : 'transparent',
+                color: activeQ === qi ? '#D4A96A' : 'rgba(212,169,106,0.45)',
               }}
             >
               {label}
@@ -300,26 +302,19 @@ export default function Home() {
             체계적이고 차별화된 프리미엄 영어교육
           </p>
           <button
-            className="px-10 md:px-14 py-3.5 md:py-4 font-semibold tracking-[0.15em] text-sm transition-all duration-300 cursor-pointer"
+            className="px-8 md:px-12 py-3 md:py-4 font-semibold tracking-widest text-sm transition-all hover:bg-transparent border cursor-pointer"
             style={{
-              background: 'linear-gradient(135deg, #DDB870 0%, #C4923E 100%)',
-              color: '#3D2B0F',
-              border: '1px solid rgba(221,184,112,0.5)',
-              boxShadow: '0 4px 20px rgba(196,146,62,0.3), inset 0 1px 0 rgba(255,255,255,0.2)',
+              backgroundColor: '#D4A96A',
+              color: '#FFFFFF',
+              borderColor: '#D4A96A',
             }}
             onMouseEnter={e => {
-              const b = e.currentTarget as HTMLButtonElement;
-              b.style.background = 'transparent';
-              b.style.color = '#C4923E';
-              b.style.border = '1px solid #C4923E';
-              b.style.boxShadow = 'none';
+              (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent';
+              (e.currentTarget as HTMLButtonElement).style.color = '#D4A96A';
             }}
             onMouseLeave={e => {
-              const b = e.currentTarget as HTMLButtonElement;
-              b.style.background = 'linear-gradient(135deg, #DDB870 0%, #C4923E 100%)';
-              b.style.color = '#3D2B0F';
-              b.style.border = '1px solid rgba(221,184,112,0.5)';
-              b.style.boxShadow = '0 4px 20px rgba(196,146,62,0.3), inset 0 1px 0 rgba(255,255,255,0.2)';
+              (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#D4A96A';
+              (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF';
             }}
           >
             수강 신청 문의하기
