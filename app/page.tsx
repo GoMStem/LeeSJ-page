@@ -92,9 +92,13 @@ function FeedbackSection() {
               onClick={() => switchQ(qi)}
               className="px-7 py-2.5 text-sm font-semibold tracking-widest rounded-full transition-all duration-200 cursor-pointer"
               style={{
-                backgroundColor: activeQ === qi ? '#D4A96A' : 'rgba(255,255,255,0.08)',
-                color: activeQ === qi ? '#52412F' : 'rgba(255,255,255,0.5)',
-                border: activeQ === qi ? '1px solid #D4A96A' : '1px solid rgba(255,255,255,0.2)',
+                background: activeQ === qi
+                  ? 'linear-gradient(135deg, #DDB870 0%, #C4923E 100%)'
+                  : 'rgba(255,255,255,0.06)',
+                color: activeQ === qi ? '#3D2B0F' : 'rgba(255,255,255,0.45)',
+                border: activeQ === qi ? '1px solid rgba(221,184,112,0.6)' : '1px solid rgba(255,255,255,0.15)',
+                boxShadow: activeQ === qi ? '0 4px 18px rgba(212,169,106,0.4), inset 0 1px 0 rgba(255,255,255,0.25)' : 'none',
+                letterSpacing: '0.12em',
               }}
             >
               {label}
