@@ -112,58 +112,57 @@ function FeedbackSection() {
           ))}
         </div>
 
-        {/* 카드 그리드 */}
-        <div className="grid md:grid-cols-2 gap-5 items-start">
+        {/* 답변 리스트 */}
+        <div>
           {current.answers.map(({ tags, subtitle, content }, i) => (
-            <div
-              key={i}
-              onClick={() => toggle(i)}
-              className="rounded-lg cursor-pointer transition-all duration-200 p-7"
-              style={{
-                backgroundColor: '#F5EDE0',
-                borderLeft: '3px solid #D4A96A',
-                boxShadow: expanded.has(i)
-                  ? '0 6px 24px rgba(82,65,47,0.25)'
-                  : '0 2px 10px rgba(82,65,47,0.12)',
-              }}
-            >
-              {/* 해시태그 */}
-              <div className="flex flex-wrap gap-2 mb-3">
-                {tags.map(tag => (
-                  <span
-                    key={tag}
-                    className="text-xs font-medium tracking-wide px-2.5 py-0.5"
+            <div key={i}>
+              <div
+                className="h-px"
+                style={{ backgroundColor: 'rgba(212,169,106,0.2)' }}
+              />
+              <div
+                onClick={() => toggle(i)}
+                className="py-6 cursor-pointer group"
+              >
+                {/* 해시태그 */}
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {tags.map(tag => (
+                    <span
+                      key={tag}
+                      className="text-xs font-medium tracking-wide px-2.5 py-0.5 rounded-full"
+                      style={{
+                        color: '#D4A96A',
+                        border: '1px solid rgba(212,169,106,0.35)',
+                        backgroundColor: 'rgba(212,169,106,0.1)',
+                      }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                {/* 부제 + 화살표 */}
+                <div className="flex items-start justify-between gap-6">
+                  <p className="text-sm md:text-base font-semibold leading-snug break-keep" style={{ color: '#FFFFFF' }}>
+                    {subtitle}
+                  </p>
+                  <ChevronDown
+                    className="w-4 h-4 flex-shrink-0 mt-0.5 transition-transform duration-300"
                     style={{
-                      color: '#B8893A',
-                      border: '1px solid rgba(184,137,58,0.6)',
-                      backgroundColor: 'rgba(212,169,106,0.15)',
+                      color: '#D4A96A',
+                      transform: expanded.has(i) ? 'rotate(180deg)' : 'rotate(0deg)',
                     }}
-                  >
-                    {tag}
-                  </span>
-                ))}
+                  />
+                </div>
+                {/* 본문 */}
+                {expanded.has(i) && (
+                  <p className="mt-4 text-sm leading-loose break-keep" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                    {content}
+                  </p>
+                )}
               </div>
-              {/* 부제 + 화살표 */}
-              <div className="flex items-start justify-between gap-4">
-                <p className="text-sm font-semibold leading-snug break-keep" style={{ color: '#52412F' }}>
-                  {subtitle}
-                </p>
-                <ChevronDown
-                  className="w-4 h-4 flex-shrink-0 mt-0.5 transition-transform duration-300"
-                  style={{
-                    color: '#D4A96A',
-                    transform: expanded.has(i) ? 'rotate(180deg)' : 'rotate(0deg)',
-                  }}
-                />
-              </div>
-              {/* 본문 */}
-              {expanded.has(i) && (
-                <p className="mt-4 text-sm leading-loose break-keep pt-4" style={{ color: '#52412F', opacity: 0.65, borderTop: '1px solid #E8DDD4' }}>
-                  {content}
-                </p>
-              )}
             </div>
           ))}
+          <div className="h-px" style={{ backgroundColor: 'rgba(212,169,106,0.2)' }} />
         </div>
       </div>
     </section>
