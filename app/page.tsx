@@ -39,12 +39,6 @@ const FEEDBACK_ITEMS: FeedbackItem[] = [
       { tags: ['#예시태그'], subtitle: '예시 부제목', content: '내용 전달 후 교체 예정입니다.' },
     ],
   },
-  {
-    q: '예시 질문 3',
-    answers: [
-      { tags: ['#예시태그'], subtitle: '예시 부제목', content: '내용 전달 후 교체 예정입니다.' },
-    ],
-  },
 ];
 
 function FeedbackSection() {
