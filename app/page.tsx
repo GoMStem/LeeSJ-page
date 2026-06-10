@@ -122,9 +122,9 @@ function FeedbackSection() {
                     key={tag}
                     className="text-xs font-medium tracking-wide px-2.5 py-0.5"
                     style={{
-                      color: '#D4A96A',
-                      border: '1px solid rgba(212,169,106,0.4)',
-                      backgroundColor: 'rgba(212,169,106,0.07)',
+                      color: '#B8893A',
+                      border: '1px solid rgba(184,137,58,0.6)',
+                      backgroundColor: 'rgba(212,169,106,0.15)',
                     }}
                   >
                     {tag}
