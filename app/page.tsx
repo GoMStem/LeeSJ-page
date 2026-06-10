@@ -85,25 +85,29 @@ function FeedbackSection() {
         <SectionTitle light>수강생의 목소리</SectionTitle>
 
         {/* 질문 선택 탭 */}
-        <div
-          className="inline-flex mx-auto mb-12 p-1 rounded-full"
-          style={{
-            backgroundColor: 'rgba(212,169,106,0.12)',
-            border: '1px solid rgba(212,169,106,0.25)',
-            display: 'flex',
-          }}
-        >
-          {['질문 1', '질문 2'].map((label, qi) => (
+        <div className="grid grid-cols-2 gap-3 mb-12">
+          {FEEDBACK_ITEMS.map(({ q }, qi) => (
             <button
               key={qi}
               onClick={() => switchQ(qi)}
-              className="px-7 py-2 text-sm font-medium tracking-widest rounded-full transition-all duration-250 cursor-pointer"
+              className="text-left px-6 py-5 rounded-xl transition-all duration-200 cursor-pointer"
               style={{
-                backgroundColor: activeQ === qi ? 'rgba(212,169,106,0.3)' : 'transparent',
-                color: activeQ === qi ? '#D4A96A' : 'rgba(212,169,106,0.45)',
+                backgroundColor: activeQ === qi ? 'rgba(212,169,106,0.18)' : 'rgba(255,255,255,0.04)',
+                border: activeQ === qi ? '1px solid rgba(212,169,106,0.5)' : '1px solid rgba(255,255,255,0.1)',
               }}
             >
-              {label}
+              <p
+                className="text-xs tracking-widest mb-2 font-medium"
+                style={{ color: activeQ === qi ? '#D4A96A' : 'rgba(212,169,106,0.4)' }}
+              >
+                Q{qi + 1}
+              </p>
+              <p
+                className="text-sm font-medium leading-snug break-keep"
+                style={{ color: activeQ === qi ? '#FFFFFF' : 'rgba(255,255,255,0.35)' }}
+              >
+                {q}
+              </p>
             </button>
           ))}
         </div>
