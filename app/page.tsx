@@ -300,19 +300,26 @@ export default function Home() {
             체계적이고 차별화된 프리미엄 영어교육
           </p>
           <button
-            className="px-8 md:px-12 py-3 md:py-4 font-semibold tracking-widest text-sm transition-all hover:bg-transparent border cursor-pointer"
+            className="px-10 md:px-14 py-3.5 md:py-4 font-semibold tracking-[0.15em] text-sm transition-all duration-300 cursor-pointer"
             style={{
-              backgroundColor: '#D4A96A',
-              color: '#FFFFFF',
-              borderColor: '#D4A96A',
+              background: 'linear-gradient(135deg, #DDB870 0%, #C4923E 100%)',
+              color: '#3D2B0F',
+              border: '1px solid rgba(221,184,112,0.5)',
+              boxShadow: '0 4px 20px rgba(196,146,62,0.3), inset 0 1px 0 rgba(255,255,255,0.2)',
             }}
             onMouseEnter={e => {
-              (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent';
-              (e.currentTarget as HTMLButtonElement).style.color = '#D4A96A';
+              const b = e.currentTarget as HTMLButtonElement;
+              b.style.background = 'transparent';
+              b.style.color = '#C4923E';
+              b.style.border = '1px solid #C4923E';
+              b.style.boxShadow = 'none';
             }}
             onMouseLeave={e => {
-              (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#D4A96A';
-              (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF';
+              const b = e.currentTarget as HTMLButtonElement;
+              b.style.background = 'linear-gradient(135deg, #DDB870 0%, #C4923E 100%)';
+              b.style.color = '#3D2B0F';
+              b.style.border = '1px solid rgba(221,184,112,0.5)';
+              b.style.boxShadow = '0 4px 20px rgba(196,146,62,0.3), inset 0 1px 0 rgba(255,255,255,0.2)';
             }}
           >
             수강 신청 문의하기
