@@ -108,11 +108,11 @@ function FeedbackSection() {
               onClick={() => toggle(i)}
               className="rounded-lg cursor-pointer transition-all duration-200 p-7"
               style={{
-                backgroundColor: '#FFFFFF',
+                backgroundColor: '#F5EDE0',
                 borderLeft: '3px solid #D4A96A',
                 boxShadow: expanded.has(i)
-                  ? '0 6px 24px rgba(82,65,47,0.12)'
-                  : '0 2px 10px rgba(82,65,47,0.06)',
+                  ? '0 6px 24px rgba(82,65,47,0.25)'
+                  : '0 2px 10px rgba(82,65,47,0.12)',
               }}
             >
               {/* 해시태그 */}
