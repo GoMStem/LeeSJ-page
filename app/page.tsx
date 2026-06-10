@@ -112,17 +112,6 @@ function FeedbackSection() {
           ))}
         </div>
 
-        {/* 질문 텍스트 */}
-        <div className="flex items-center gap-3 mb-10">
-          <span
-            className="inline-block text-xs font-semibold tracking-widest px-2.5 py-1 rounded-full flex-shrink-0"
-            style={{ backgroundColor: '#D4A96A', color: '#FFFFFF' }}
-          >
-            Q
-          </span>
-          <p className="text-lg font-semibold break-keep" style={{ color: '#FFFFFF' }}>{current.q}</p>
-        </div>
-
         {/* 카드 그리드 */}
         <div className="grid md:grid-cols-2 gap-5 items-start">
           {current.answers.map(({ tags, subtitle, content }, i) => (
