@@ -8,7 +8,20 @@ interface PostMeta {
   slug: string;
   title: string;
   date: string;
-  excerpt: string;
+  preview: string;
+}
+
+function makePreview(excerpt: string, body: string): string {
+  if (excerpt) return excerpt;
+  return body
+    .replace(/^---[\s\S]*?---/, '')
+    .replace(/`{1,3}[\s\S]*?`{1,3}/g, '')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/[#*_>\-]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 220);
 }
 
 function getPosts(): PostMeta[] {
@@ -21,12 +34,12 @@ function getPosts(): PostMeta[] {
     .map(filename => {
       const slug = filename.replace('.md', '').normalize('NFC');
       const raw = fs.readFileSync(path.join(postsDir, filename), 'utf-8');
-      const { data } = matter(raw);
+      const { data, content } = matter(raw);
       return {
         slug,
         title: data.title || slug,
         date: data.date || '',
-        excerpt: data.excerpt || '',
+        preview: makePreview(data.excerpt || '', content),
       };
     })
     .sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -53,7 +66,7 @@ export default function PostsPage() {
         </div>
       </nav>
 
-      <div className="max-w-3xl mx-auto px-6 pt-32 pb-24">
+      <div className="max-w-6xl mx-auto px-6 pt-32 pb-24">
         <Link
           href="/"
           className="inline-flex items-center gap-2 mb-10 px-4 py-2 rounded-lg border transition-opacity hover:opacity-60"
@@ -70,23 +83,23 @@ export default function PostsPage() {
         {posts.length === 0 ? (
           <p className="text-sm" style={{ color: 'rgba(82,65,47,0.45)' }}>아직 작성된 글이 없습니다.</p>
         ) : (
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {posts.map(post => (
-              <Link key={post.slug} href={`/daily/${post.slug}`} className="block group">
+              <Link key={post.slug} href={`/daily/${post.slug}`} className="group h-full">
                 <div
-                  className="p-7 rounded-xl bg-white transition-shadow group-hover:shadow-md"
+                  className="p-6 rounded-xl bg-white transition-shadow group-hover:shadow-md h-full flex flex-col"
                   style={{ border: '1px solid #E8DDD4' }}
                 >
                   <p className="text-xs tracking-widest mb-2" style={{ color: '#D4A96A' }}>{post.date}</p>
                   <h2
-                    className="text-lg font-semibold mb-2 transition-opacity group-hover:opacity-70"
+                    className="text-base font-semibold mb-3 line-clamp-2 leading-snug transition-opacity group-hover:opacity-70"
                     style={{ color: '#52412F' }}
                   >
                     {post.title}
                   </h2>
-                  {post.excerpt && (
-                    <p className="text-sm leading-relaxed" style={{ color: 'rgba(82,65,47,0.6)' }}>
-                      {post.excerpt}
+                  {post.preview && (
+                    <p className="text-sm leading-relaxed line-clamp-2" style={{ color: 'rgba(82,65,47,0.5)' }}>
+                      {post.preview}
                     </p>
                   )}
                 </div>
