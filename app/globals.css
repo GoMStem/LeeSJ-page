@@ -8,6 +8,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  word-break: keep-all;
 }
 
 
@@ -31,3 +32,50 @@ html {
   0% { transform: translateX(-100%) skewX(-15deg); }
   100% { transform: translateX(250%) skewX(-15deg); }
 }
+
+/* Post markdown content */
+.post-content { color: #52412F; line-height: 1.9; font-size: 1rem; }
+.post-content h1, .post-content h2, .post-content h3 { font-weight: 700; margin: 2rem 0 0.75rem; color: #52412F; }
+.post-content h1 { font-size: 1.75rem; }
+.post-content h2 { font-size: 1.35rem; padding-bottom: 0.5rem; border-bottom: 1px solid #E8DDD4; }
+.post-content h3 { font-size: 1.1rem; }
+.post-content p { margin: 1rem 0; }
+.post-content ul, .post-content ol { padding-left: 1.5rem; margin: 1rem 0; }
+.post-content li { margin: 0.4rem 0; }
+.post-content ul li { list-style-type: disc; }
+.post-content ol li { list-style-type: decimal; }
+.post-content strong { font-weight: 700; color: #52412F; }
+.post-content a { color: #D4A96A; text-decoration: underline; }
+.post-content blockquote { border-left: 3px solid #D4A96A; padding-left: 1rem; margin: 1.5rem 0; color: rgba(82,65,47,0.65); font-style: italic; }
+.post-content code { background: #F0E8DE; padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.875rem; }
+.post-content hr { border: none; border-top: 1px solid #E8DDD4; margin: 2rem 0; }
+
+@keyframes scroll-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+/* Scroll fade-up */
+.fade-up {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-up { opacity: 1; transform: none; transition: none; }
+}
+
+/* Hero load animations */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-a1 { animation: hero-rise 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+.hero-a2 { animation: hero-rise 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s both; }
+.hero-a3 { animation: hero-rise 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s both; }
+.hero-a4 { animation: hero-rise 0.9s cubic-bezier(0.16,1,0.3,1) 0.7s both; }

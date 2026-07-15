@@ -28,7 +28,7 @@ const FEEDBACK_ITEMS: FeedbackItem[] = [
       },
       {
         tags: ['#학생중심', '#감동적인밀착관리'],
-        subtitle: '"영어의 Goat" 학생을 위해 이정도로 헌신하시는 선생님은 처음입니다.',
+        subtitle: '"영어의 GOAT" 학생을 위해 이정도로 헌신하시는 선생님은 처음입니다.',
         content: '한 해 동안 4번의 영어 시험을 보며 1학기 중간고사를 제외하고 모두 1등급을 받았습니다. 이수진 선생님은 그 어떤 분보다도 학생을 위해 열심히 노력해 주십니다! 다른 학원도 다녀봤지만, 사소하게 느껴질 수 있는 내용들도 반톡으로 계속 챙겨주시고, 특별히 부탁드리지 않았는데도 시험 기간에 필요한 자료를 먼저 올려주시는 분은 없었습니다. 다음에도 꼭 다시 수강할 생각이고 주변에도 선생님의 수업을 추천하고 싶습니다.',
       },
     ],
@@ -60,6 +60,243 @@ const FEEDBACK_ITEMS: FeedbackItem[] = [
   },
 ];
 
+type GradeEntry = { rank: number; exams: string[] };
+
+const GRADE_TABS = [
+  { label: '북일고1 (2025)' },
+  { label: '북일고2 (2025)' },
+  { label: '북일고3 (2025)' },
+  { label: '2026 중간고사' },
+];
+
+const GRADE_DATA: GradeEntry[][] = [
+  [
+    { rank: 2,  exams: ['중간', '종합'] },
+    { rank: 3,  exams: ['기말'] },
+    { rank: 4,  exams: ['중간'] },
+    { rank: 5,  exams: ['기말'] },
+    { rank: 6,  exams: ['중간', '종합'] },
+    { rank: 8,  exams: ['중간', '종합'] },
+    { rank: 10, exams: ['기말', '종합'] },
+    { rank: 11, exams: ['중간'] },
+    { rank: 12, exams: ['종합'] },
+    { rank: 13, exams: ['기말'] },
+    { rank: 15, exams: ['기말×2', '종합'] },
+    { rank: 17, exams: ['기말'] },
+    { rank: 20, exams: ['중간', '종합'] },
+    { rank: 22, exams: ['기말', '종합'] },
+    { rank: 23, exams: ['중간', '기말×2'] },
+    { rank: 24, exams: ['중간'] },
+    { rank: 25, exams: ['중간', '기말', '종합'] },
+    { rank: 26, exams: ['종합'] },
+    { rank: 27, exams: ['기말'] },
+    { rank: 28, exams: ['기말×2'] },
+    { rank: 30, exams: ['종합'] },
+    { rank: 31, exams: ['기말', '종합'] },
+    { rank: 33, exams: ['종합'] },
+    { rank: 34, exams: ['종합'] },
+    { rank: 35, exams: ['중간', '기말×2'] },
+    { rank: 36, exams: ['기말', '종합'] },
+  ],
+  [
+    { rank: 1,  exams: ['기말'] },
+    { rank: 2,  exams: ['중간', '기말', '종합'] },
+    { rank: 3,  exams: ['종합'] },
+    { rank: 6,  exams: ['기말'] },
+    { rank: 8,  exams: ['종합'] },
+    { rank: 9,  exams: ['종합'] },
+    { rank: 10, exams: ['기말'] },
+    { rank: 11, exams: ['중간'] },
+    { rank: 12, exams: ['기말'] },
+    { rank: 13, exams: ['중간', '종합'] },
+  ],
+  [
+    { rank: 1,  exams: ['중간'] },
+    { rank: 2,  exams: ['기말'] },
+    { rank: 4,  exams: ['중간'] },
+    { rank: 5,  exams: ['종합'] },
+    { rank: 7,  exams: ['종합'] },
+    { rank: 8,  exams: ['중간', '기말'] },
+    { rank: 9,  exams: ['종합'] },
+    { rank: 11, exams: ['기말'] },
+    { rank: 12, exams: ['종합'] },
+  ],
+  [
+    { rank: 5, exams: ['고1'] },
+    { rank: 1, exams: ['고2'] },
+    { rank: 2, exams: ['고2'] },
+    { rank: 4, exams: ['고2'] },
+    { rank: 5, exams: ['고2'] },
+    { rank: 2, exams: ['고3'] },
+    { rank: 4, exams: ['고3'] },
+    { rank: 5, exams: ['고3'] },
+  ],
+];
+
+function GradeScrollCard() {
+  const [activeTab, setActiveTab] = useState(0);
+  const list = GRADE_DATA[activeTab];
+
+  return (
+    <div
+      className="p-6 rounded-xl h-full"
+      style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,169,106,0.25)' }}
+    >
+      {/* 탭 */}
+      <div className="flex flex-wrap gap-2 mb-5">
+        {GRADE_TABS.map(({ label }, i) => (
+          <button
+            key={i}
+            onClick={() => setActiveTab(i)}
+            className="text-xs px-3 py-1.5 rounded-full font-medium transition-all duration-200 cursor-pointer"
+            style={{
+              backgroundColor: activeTab === i ? 'rgba(212,169,106,0.2)' : 'transparent',
+              color: activeTab === i ? '#D4A96A' : 'rgba(255,255,255,0.35)',
+              border: activeTab === i ? '1px solid rgba(212,169,106,0.4)' : '1px solid rgba(255,255,255,0.1)',
+            }}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {list.length === 0 ? (
+        <div className="flex items-center justify-center" style={{ height: '260px' }}>
+          <p className="text-sm" style={{ color: 'rgba(255,255,255,0.25)' }}>준비 중입니다.</p>
+        </div>
+      ) : (
+        <div className="relative overflow-hidden rounded-xl" style={{ height: '260px' }}>
+          <div
+            className="absolute top-0 left-0 right-0 h-10 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to bottom, rgba(58,44,30,0.5) 10%, transparent)' }}
+          />
+          <div
+            className="absolute bottom-0 left-0 right-0 h-10 z-10 pointer-events-none"
+            style={{ background: 'linear-gradient(to top, rgba(58,44,30,0.5) 10%, transparent)' }}
+          />
+          <div key={activeTab} style={{ animation: `scroll-up ${list.length * 1.55}s linear infinite` }}>
+            {[...list, ...list].map(({ rank, exams }, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between px-4 py-3"
+                style={{ borderBottom: '1px solid rgba(212,169,106,0.1)' }}
+              >
+                <span className="text-sm font-bold tracking-wide" style={{ color: '#D4A96A' }}>
+                  전교 {rank}등
+                </span>
+                <div className="flex gap-1.5 flex-wrap justify-end">
+                  {exams.map(exam => (
+                    <span
+                      key={exam}
+                      className="text-xs px-2 py-0.5 rounded-full"
+                      style={{
+                        backgroundColor: 'rgba(212,169,106,0.1)',
+                        color: 'rgba(255,255,255,0.6)',
+                        border: '1px solid rgba(212,169,106,0.2)',
+                      }}
+                    >
+                      {exam}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function GradeStatCard() {
+  const r = 38;
+  const cx = 55;
+  const cy = 55;
+  const circ = 2 * Math.PI * r;
+  const lsArc = (19 / 36) * circ;
+  const otherArc = (17 / 36) * circ;
+
+  return (
+    <div
+      className="p-8 rounded-xl"
+      style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,169,106,0.25)' }}
+    >
+      <p className="text-xs font-medium tracking-widest mb-1.5" style={{ color: 'rgba(212,169,106,0.65)' }}>
+        2025년 1등급 36명 기준
+      </p>
+      <p className="text-sm font-semibold mb-6 break-keep leading-snug" style={{ color: '#FFFFFF' }}>
+        북일고 1학년 1등급 점유율
+      </p>
+
+      <div className="flex flex-col items-center mb-5">
+        <svg width="120" height="120" viewBox="0 0 110 110">
+          <circle cx={cx} cy={cy} r={r} fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="11" />
+          <circle
+            cx={cx} cy={cy} r={r}
+            fill="none"
+            stroke="rgba(255,255,255,0.18)"
+            strokeWidth="11"
+            strokeDasharray={`${otherArc} ${circ}`}
+            strokeDashoffset={-lsArc}
+            transform={`rotate(-90 ${cx} ${cy})`}
+          />
+          <circle
+            cx={cx} cy={cy} r={r}
+            fill="none"
+            stroke="#D4A96A"
+            strokeWidth="11"
+            strokeDasharray={`${lsArc} ${circ}`}
+            strokeDashoffset={0}
+            transform={`rotate(-90 ${cx} ${cy})`}
+          />
+          <text x={cx} y={cy - 5} textAnchor="middle" fill="#D4A96A" fontSize="17" fontWeight="700">
+            19명
+          </text>
+          <text x={cx} y={cy + 9} textAnchor="middle" fill="rgba(255,255,255,0.4)" fontSize="7">
+            이수진 수강생
+          </text>
+        </svg>
+
+        <div className="flex items-center gap-5 mt-1">
+          <div className="flex items-center gap-1.5">
+            <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: '#D4A96A' }} />
+            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.65)' }}>이수진 19명</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: 'rgba(255,255,255,0.18)' }} />
+            <span className="text-xs" style={{ color: 'rgba(255,255,255,0.35)' }}>그 외 17명</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="h-px mb-4" style={{ backgroundColor: 'rgba(212,169,106,0.2)' }} />
+
+      <p className="text-xs tracking-widest mb-3 font-medium" style={{ color: 'rgba(212,169,106,0.8)' }}>
+        2학기 흐름
+      </p>
+      <div className="flex items-end justify-center gap-3">
+        <div className="text-center">
+          <p className="text-base font-semibold" style={{ color: 'rgba(212,169,106,0.75)' }}>14명</p>
+          <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.55)' }}>중간</p>
+        </div>
+        <span className="text-xs mb-5" style={{ color: 'rgba(212,169,106,0.5)' }}>›</span>
+        <div className="text-center">
+          <p className="text-base font-semibold" style={{ color: 'rgba(212,169,106,0.75)' }}>17명</p>
+          <p className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.55)' }}>기말</p>
+        </div>
+        <span className="text-xs mb-5" style={{ color: 'rgba(212,169,106,0.5)' }}>›</span>
+        <div className="text-center">
+          <div className="flex items-baseline gap-1 justify-center">
+            <p className="text-xl font-bold" style={{ color: '#D4A96A' }}>19명</p>
+            <span className="text-xs" style={{ color: 'rgba(212,169,106,0.6)' }}>절반이상</span>
+          </div>
+          <p className="text-xs mt-0.5 break-keep" style={{ color: '#D4A96A' }}>2학기 종합</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function FeedbackSection() {
   const [activeQ, setActiveQ] = useState(0);
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
@@ -80,12 +317,15 @@ function FeedbackSection() {
   const current = FEEDBACK_ITEMS[activeQ];
 
   return (
-    <section className="py-28 px-6" style={{ backgroundColor: '#52412F' }}>
+    <section className="py-16 md:py-28 px-6" style={{ backgroundColor: '#52412F' }}>
       <div className="max-w-5xl mx-auto">
         <SectionTitle light>수강생의 목소리</SectionTitle>
+        <p className="text-center -mt-8 mb-12 text-sm tracking-wide" style={{ color: 'rgba(255,255,255,0.45)' }}>
+          직접 수업을 들은 학생들의 솔직한 후기입니다.
+        </p>
 
         {/* 질문 선택 탭 */}
-        <div className="grid grid-cols-2 gap-3 mb-12">
+        <div className="grid grid-cols-2 gap-3 mb-8 md:mb-12">
           {FEEDBACK_ITEMS.map(({ q }, qi) => (
             <button
               key={qi}
@@ -171,7 +411,7 @@ function FeedbackSection() {
 
 function SectionTitle({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
   return (
-    <div className="text-center mb-16">
+    <div className="text-center mb-10 md:mb-16 fade-up">
       <h2 className="text-4xl font-semibold tracking-[0.12em] mb-5" style={{ color: light ? '#FFFFFF' : '#52412F' }}>
         {children}
       </h2>
@@ -197,7 +437,14 @@ export default function Home() {
       setScrollProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); observer.unobserve(e.target); } }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    return () => { window.removeEventListener('scroll', handleScroll); observer.disconnect(); };
   }, []);
 
   return (
@@ -256,20 +503,23 @@ export default function Home() {
         >
           <X className="w-5 h-5" style={{ color: '#52412F' }} />
         </button>
-        <div className="border-y py-4" style={{ borderColor: '#52412F40' }}>
+        <div className="border-t pt-4" style={{ borderColor: '#52412F40' }}>
           <a href="/blog" onClick={() => setMenuOpen(false)} className="text-lg font-medium transition-opacity hover:opacity-60" style={{ color: '#52412F' }}>블로그</a>
+        </div>
+        <div className="border-y py-4" style={{ borderColor: '#52412F40' }}>
+          <a href="/posts" onClick={() => setMenuOpen(false)} className="text-lg font-medium transition-opacity hover:opacity-60" style={{ color: '#52412F' }}>Daily Posting</a>
         </div>
       </div>
 
       {/* Hero Section */}
       <section
         className="px-6 relative overflow-hidden flex flex-col"
-        style={{ background: 'radial-gradient(ellipse at 50% 20%, #F2E8D9 0%, #FAF6F1 65%)', minHeight: '70vh' }}
+        style={{ background: 'radial-gradient(ellipse at 50% 20%, #F2E8D9 0%, #FAF6F1 65%)', minHeight: '88vh' }}
       >
         <div className="h-[90px] flex-shrink-0" />
         <div className="flex-1 flex items-center">
-        <div className="max-w-5xl mx-auto text-center relative z-10 py-10 md:py-16 px-4 w-full">
-          <div className="mb-6 md:mb-8 flex justify-center">
+        <div className="max-w-5xl mx-auto text-center relative z-10 pt-8 pb-16 md:py-24 px-4 w-full">
+          <div className="mb-6 md:mb-8 flex justify-center hero-a1">
             <Image
               src="/nav-logo.png"
               alt="이수진영어 내신코치"
@@ -286,15 +536,15 @@ export default function Home() {
             <div className="w-1 h-1 rounded-full" style={{ backgroundColor: '#D4A96A' }} />
             <div className="h-px w-16" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
           </div>
-          <p className="text-lg md:text-2xl mb-4 md:mb-6 font-semibold italic leading-snug" style={{ color: '#D4A96A' }}>
+          <p className="text-lg md:text-2xl mb-4 md:mb-6 font-semibold italic leading-snug hero-a2" style={{ color: '#D4A96A' }}>
             북일고 영어의 압도적 1위,<br className="md:hidden" /> 이수진이 결과로 증명합니다.
           </p>
-          <p className="text-sm md:text-lg mb-10 md:mb-12 leading-loose max-w-2xl mx-auto font-normal tracking-wide" style={{ color: '#52412F', opacity: 0.7 }}>
+          <p className="text-sm md:text-lg mb-10 md:mb-12 leading-loose max-w-2xl mx-auto font-normal tracking-wide hero-a3" style={{ color: '#52412F', opacity: 0.7 }}>
             24년차 베테랑(북일고 10년) 전문가가 만들어가는<br />
             체계적이고 차별화된 프리미엄 영어교육
           </p>
           <button
-            className="px-8 md:px-12 py-3 md:py-4 font-semibold tracking-widest text-sm transition-all hover:bg-transparent border cursor-pointer"
+            className="px-8 md:px-12 py-3 md:py-4 font-semibold tracking-widest text-sm transition-all hover:bg-transparent border cursor-pointer hero-a4"
             style={{
               backgroundColor: '#D4A96A',
               color: '#FFFFFF',
@@ -316,13 +566,13 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="about" className="py-28 px-6" style={{ backgroundColor: '#52412F' }}>
+      <section id="about" className="pt-20 pb-16 md:py-28 px-6" style={{ backgroundColor: '#52412F' }}>
         <div className="max-w-5xl mx-auto">
           <SectionTitle light>왜 이수진 영어인가</SectionTitle>
 
           {/* Sub 1: 최상위권이 선택하는 이유 — 메인 */}
-          <div className="mb-20">
-            <div className="text-center mb-12">
+          <div className="mb-10 md:mb-20">
+            <div className="text-center mb-8 md:mb-12 fade-up">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <div className="h-px w-8" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
                 <p className="text-base font-semibold tracking-widest" style={{ color: '#D4A96A' }}>최상위권이 선택하는 이유</p>
@@ -332,30 +582,19 @@ export default function Home() {
                 압도적인 결과로 증명합니다.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {[
-                { stat: '예시 수치 A', label: '항목 설명', desc: '성적 관련 핵심 내용이 들어갑니다. 내용 전달 후 교체 예정입니다.' },
-                { stat: '예시 수치 B', label: '항목 설명', desc: '성적 관련 핵심 내용이 들어갑니다. 내용 전달 후 교체 예정입니다.' },
-                { stat: '예시 수치 C', label: '항목 설명', desc: '성적 관련 핵심 내용이 들어갑니다. 내용 전달 후 교체 예정입니다.' },
-              ].map(({ stat, label, desc }) => (
-                <div
-                  key={stat}
-                  className="p-8 rounded-xl text-center"
-                  style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,169,106,0.25)' }}
-                >
-                  <p className="text-3xl font-bold mb-1 tracking-wide" style={{ color: '#D4A96A' }}>{stat}</p>
-                  <p className="text-sm font-semibold mb-4 tracking-wide" style={{ color: '#FFFFFF' }}>{label}</p>
-                  <p className="text-xs leading-relaxed break-keep" style={{ color: 'rgba(255,255,255,0.55)' }}>{desc}</p>
-                </div>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start fade-up" style={{ transitionDelay: '0.15s' }}>
+              <GradeStatCard />
+              <div className="md:col-span-2">
+                <GradeScrollCard />
+              </div>
             </div>
           </div>
 
           {/* 구분선 */}
-          <div className="h-px mb-20" style={{ backgroundColor: 'rgba(212,169,106,0.2)' }} />
+          <div className="h-px mb-10 md:mb-20" style={{ backgroundColor: 'rgba(212,169,106,0.2)' }} />
 
           {/* Sub 2 */}
-          <div className="mb-20 max-w-2xl">
+          <div className="mb-10 md:mb-20 max-w-2xl fade-up">
             <div className="flex items-center gap-2 mb-5">
               <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#D4A96A' }} />
               <p className="text-sm font-medium tracking-wide" style={{ color: '#D4A96A' }}>점수는 우연이 아닌 시스템입니다.</p>
@@ -370,13 +609,16 @@ export default function Home() {
           </div>
 
           {/* 구분선 */}
-          <div className="h-px mb-20" style={{ backgroundColor: 'rgba(212,169,106,0.2)' }} />
+          <div className="h-px mb-10 md:mb-20" style={{ backgroundColor: 'rgba(212,169,106,0.2)' }} />
 
           {/* Sub 3 */}
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#D4A96A' }} />
-              <p className="text-sm font-medium tracking-wide" style={{ color: '#D4A96A' }}>상위권을 유지하는 학생도, 상위권을 목표로 하는 학생도.</p>
+          <div className="max-w-2xl fade-up">
+            <div className="flex items-start gap-2 mb-5">
+              <div className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style={{ backgroundColor: '#D4A96A' }} />
+              <p className="text-sm font-medium tracking-wide leading-relaxed" style={{ color: '#D4A96A' }}>
+                상위권을 유지하는 학생도,<br />
+                상위권을 목표로하는 학생도.
+              </p>
             </div>
             <h3 className="text-2xl md:text-3xl font-semibold leading-snug break-keep mb-6" style={{ color: '#FFFFFF' }}>
               함께 성장하는 영어
@@ -391,7 +633,7 @@ export default function Home() {
       </section>
 
       {/* Programs Section */}
-      <section id="programs" className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
+      <section id="programs" className="py-16 md:py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
         <div className="max-w-5xl mx-auto">
           <SectionTitle>학원 관리 시스템</SectionTitle>
           <div>
@@ -417,11 +659,11 @@ export default function Home() {
                 desc: '학생과 직접 소통하며 진도, 과제, 학습 습관을 지속적으로 점검합니다. 단순히 수업만 하는 것이 아니라 목표 달성까지 함께 관리하는 책임형 학습 시스템을 운영합니다.',
               },
             ].map(({ subtitle, title, desc }, i) => (
-              <div key={title}>
+              <div key={title} className="fade-up" style={{ transitionDelay: `${i * 0.1}s` }}>
                 {i > 0 && (
                   <div className="h-px" style={{ backgroundColor: '#D4A96A', opacity: 0.2 }} />
                 )}
-                <div className="grid md:grid-cols-5 gap-4 md:gap-16 py-12">
+                <div className="grid md:grid-cols-5 gap-4 md:gap-16 py-8 md:py-12">
                   <div className="md:col-span-2 flex flex-col justify-center">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#D4A96A' }} />
@@ -449,27 +691,28 @@ export default function Home() {
       <FeedbackSection />
 
       {/* Contact Section */}
-      <section id="contact" className="py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
+      <section id="contact" className="py-16 md:py-28 px-6" style={{ backgroundColor: '#FAF6F1' }}>
         <div className="max-w-5xl mx-auto">
           <SectionTitle>문의하기</SectionTitle>
-          <p className="text-center -mt-8 mb-16 tracking-wider text-sm font-medium" style={{ color: '#D4A96A' }}>
+          <p className="text-center -mt-8 mb-16 tracking-wider text-sm font-medium fade-up" style={{ color: '#D4A96A' }}>
             언제든 편하게 연락주세요
           </p>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div
-              className="p-10 rounded-xl"
+              className="p-10 rounded-xl fade-up"
               style={{
                 backgroundColor: '#FFFFFF',
                 borderTop: '3px solid #D4A96A',
                 boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
+                transitionDelay: '0.1s',
               }}
             >
               <h3 className="text-xl font-semibold tracking-wide mb-8" style={{ color: '#52412F' }}>연락처</h3>
               <div className="space-y-6">
                 {[
-                  { icon: <Phone className="w-5 h-5" style={{ color: '#FFFFFF' }} />, label: '전화', value: '02-1234-5678' },
-                  { icon: <Mail className="w-5 h-5" style={{ color: '#FFFFFF' }} />, label: '이메일', value: 'info@leesujin.com' },
+                  { icon: <Phone className="w-5 h-5" style={{ color: '#FFFFFF' }} />, label: '전화', value: '010 - 8909 - 8942' },
+                  { icon: <Mail className="w-5 h-5" style={{ color: '#FFFFFF' }} />, label: '이메일', value: 'jirolub48@naver.com' },
                 ].map(({ icon, label, value }) => (
                   <div key={label} className="flex items-center gap-4">
                     <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#52412F' }}>
@@ -486,20 +729,20 @@ export default function Home() {
                     <Clock className="w-5 h-5" style={{ color: '#FFFFFF' }} />
                   </div>
                   <div>
-                    <p className="text-xs text-gray-400 tracking-widest mb-0.5">운영시간</p>
-                    <p className="font-medium" style={{ color: '#52412F' }}>평일 10:00 - 21:00</p>
-                    <p className="text-sm text-gray-500">토요일 10:00 - 18:00</p>
+                    <p className="text-xs text-gray-400 tracking-widest mb-0.5">상담시간</p>
+                    <p className="font-medium" style={{ color: '#52412F' }}>평일 10:00 - 22:00</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <div
-              className="p-10 rounded-xl"
+              className="p-10 rounded-xl fade-up"
               style={{
                 backgroundColor: '#FFFFFF',
                 borderTop: '3px solid #D4A96A',
                 boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
+                transitionDelay: '0.2s',
               }}
             >
               <h3 className="text-xl font-semibold tracking-wide mb-8" style={{ color: '#52412F' }}>오시는 길</h3>
@@ -507,10 +750,21 @@ export default function Home() {
                 <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: '#52412F' }}>
                   <MapPin className="w-5 h-5" style={{ color: '#FFFFFF' }} />
                 </div>
+                <div>
+                  <p className="text-xs text-gray-400 tracking-widest mb-0.5">주소</p>
+                  <p className="font-medium leading-relaxed" style={{ color: '#52412F' }}>
+                    충남 천안시 북일로 70,<br />신부힐스테이트 109동 202호
+                  </p>
+                </div>
               </div>
-              <div className="h-48 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#FAF6F1' }}>
-                <MapPin className="w-14 h-14" style={{ color: '#D4A96A' }} />
-              </div>
+              <iframe
+                src="https://maps.google.com/maps?q=충남+천안시+북일로+70+신부힐스테이트&output=embed&z=16&hl=ko"
+                className="w-full rounded-xl"
+                style={{ height: '200px', border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
 
@@ -550,7 +804,7 @@ export default function Home() {
             <div className="w-1 h-1 rounded-full" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
             <div className="h-px w-12" style={{ backgroundColor: '#D4A96A', opacity: 0.5 }} />
           </div>
-          <p className="text-gray-400 text-sm tracking-wide">Tel: 02-1234-5678 &nbsp;|&nbsp; Email: info@leesujin.com</p>
+          <p className="text-gray-400 text-sm tracking-wide">Tel: 010-8909-8942 &nbsp;|&nbsp; Email: jirolub48@naver.com</p>
           <p className="text-gray-300 mt-4 text-xs tracking-widest">© 2026 이수진 영어. All rights reserved.</p>
         </div>
       </footer>
