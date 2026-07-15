@@ -9,18 +9,29 @@ import type { Metadata } from 'next';
 
 const postsDir = path.join(process.cwd(), 'content/daily');
 
+function resolveFile(slug: string) {
+  const decoded = decodeURIComponent(slug).normalize('NFC');
+  const direct = path.join(postsDir, `${decoded}.md`);
+  if (fs.existsSync(direct)) return direct;
+  // fallback: NFC-normalized comparison across directory
+  if (!fs.existsSync(postsDir)) return null;
+  const target = `${decoded}.md`;
+  const match = fs.readdirSync(postsDir).find(f => f.normalize('NFC') === target);
+  return match ? path.join(postsDir, match) : null;
+}
+
 export async function generateStaticParams() {
   if (!fs.existsSync(postsDir)) return [];
   return fs
     .readdirSync(postsDir)
     .filter(f => f.endsWith('.md'))
-    .map(f => ({ slug: f.replace('.md', '') }));
+    .map(f => ({ slug: f.replace('.md', '').normalize('NFC') }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const filePath = path.join(postsDir, `${slug}.md`);
-  if (!fs.existsSync(filePath)) return {};
+  const filePath = resolveFile(slug);
+  if (!filePath) return {};
   const { data } = matter(fs.readFileSync(filePath, 'utf-8'));
   return {
     title: `${data.title} | 이수진 영어`,
@@ -30,8 +41,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const filePath = path.join(postsDir, `${slug}.md`);
-  if (!fs.existsSync(filePath)) notFound();
+  const filePath = resolveFile(slug);
+  if (!filePath) notFound();
 
   const raw = fs.readFileSync(filePath, 'utf-8');
   const { data, content } = matter(raw);

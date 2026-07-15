@@ -19,7 +19,7 @@ function getPosts(): PostMeta[] {
     .readdirSync(postsDir)
     .filter(f => f.endsWith('.md'))
     .map(filename => {
-      const slug = filename.replace('.md', '');
+      const slug = filename.replace('.md', '').normalize('NFC');
       const raw = fs.readFileSync(path.join(postsDir, filename), 'utf-8');
       const { data } = matter(raw);
       return {
