@@ -7,7 +7,7 @@ import { ArrowLeft } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
-const postsDir = path.join(process.cwd(), 'content/posts');
+const postsDir = path.join(process.cwd(), 'content/daily');
 
 export async function generateStaticParams() {
   if (!fs.existsSync(postsDir)) return [];
@@ -52,7 +52,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
       <div className="max-w-3xl mx-auto px-6 pt-32 pb-24">
         <Link
-          href="/posts"
+          href="/daily"
           className="inline-flex items-center gap-2 mb-10 px-4 py-2 rounded-lg border transition-opacity hover:opacity-60"
           style={{ color: '#52412F', borderColor: '#52412F' }}
         >

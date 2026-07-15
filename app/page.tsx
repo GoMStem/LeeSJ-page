@@ -507,7 +507,7 @@ export default function Home() {
           <a href="/blog" onClick={() => setMenuOpen(false)} className="text-lg font-medium transition-opacity hover:opacity-60" style={{ color: '#52412F' }}>블로그</a>
         </div>
         <div className="border-y py-4" style={{ borderColor: '#52412F40' }}>
-          <a href="/posts" onClick={() => setMenuOpen(false)} className="text-lg font-medium transition-opacity hover:opacity-60" style={{ color: '#52412F' }}>Daily Posting</a>
+          <a href="/daily" onClick={() => setMenuOpen(false)} className="text-lg font-medium transition-opacity hover:opacity-60" style={{ color: '#52412F' }}>Daily Posting</a>
         </div>
       </div>
 

@@ -12,7 +12,7 @@ interface PostMeta {
 }
 
 function getPosts(): PostMeta[] {
-  const postsDir = path.join(process.cwd(), 'content/posts');
+  const postsDir = path.join(process.cwd(), 'content/daily');
   if (!fs.existsSync(postsDir)) return [];
 
   return fs
@@ -72,7 +72,7 @@ export default function PostsPage() {
         ) : (
           <div className="space-y-4">
             {posts.map(post => (
-              <Link key={post.slug} href={`/posts/${post.slug}`} className="block group">
+              <Link key={post.slug} href={`/daily/${post.slug}`} className="block group">
                 <div
                   className="p-7 rounded-xl bg-white transition-shadow group-hover:shadow-md"
                   style={{ border: '1px solid #E8DDD4' }}
