@@ -562,7 +562,7 @@ export default function Home() {
               (e.currentTarget as HTMLAnchorElement).style.color = '#FFFFFF';
             }}
           >
-            수강 신청 문의하기
+            상담 문의하기
           </a>
         </div>
         </div>
@@ -787,7 +787,7 @@ export default function Home() {
                 (e.currentTarget as HTMLAnchorElement).style.color = '#FFFFFF';
               }}
             >
-              수강 상담 신청하기
+              상담 문의하기
             </a>
           </div>
         </div>
