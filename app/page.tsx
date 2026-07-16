@@ -543,24 +543,27 @@ export default function Home() {
             24년차 베테랑(북일고 10년) 전문가가 만들어가는<br />
             체계적이고 차별화된 프리미엄 영어교육
           </p>
-          <button
-            className="px-8 md:px-12 py-3 md:py-4 font-semibold tracking-widest text-sm transition-all hover:bg-transparent border cursor-pointer hero-a4"
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfX4hDN36OIeCV5_3qlqzUJb3xOjXUYL0AjG_B0N57ScyZmsQ/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 md:px-12 py-3 md:py-4 font-semibold tracking-widest text-sm transition-all hover:bg-transparent border cursor-pointer hero-a4"
             style={{
               backgroundColor: '#D4A96A',
               color: '#FFFFFF',
               borderColor: '#D4A96A',
             }}
             onMouseEnter={e => {
-              (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent';
-              (e.currentTarget as HTMLButtonElement).style.color = '#D4A96A';
+              (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent';
+              (e.currentTarget as HTMLAnchorElement).style.color = '#D4A96A';
             }}
             onMouseLeave={e => {
-              (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#D4A96A';
-              (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF';
+              (e.currentTarget as HTMLAnchorElement).style.backgroundColor = '#D4A96A';
+              (e.currentTarget as HTMLAnchorElement).style.color = '#FFFFFF';
             }}
           >
             수강 신청 문의하기
-          </button>
+          </a>
         </div>
         </div>
       </section>
@@ -769,20 +772,23 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-16">
-            <button
-              className="px-14 py-4 font-medium tracking-widest text-sm border transition-all cursor-pointer"
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfX4hDN36OIeCV5_3qlqzUJb3xOjXUYL0AjG_B0N57ScyZmsQ/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-14 py-4 font-medium tracking-widest text-sm border transition-all cursor-pointer"
               style={{ backgroundColor: '#D4A96A', color: '#FFFFFF', borderColor: '#D4A96A' }}
               onMouseEnter={e => {
-                (e.currentTarget as HTMLButtonElement).style.backgroundColor = 'transparent';
-                (e.currentTarget as HTMLButtonElement).style.color = '#D4A96A';
+                (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'transparent';
+                (e.currentTarget as HTMLAnchorElement).style.color = '#D4A96A';
               }}
               onMouseLeave={e => {
-                (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#D4A96A';
-                (e.currentTarget as HTMLButtonElement).style.color = '#FFFFFF';
+                (e.currentTarget as HTMLAnchorElement).style.backgroundColor = '#D4A96A';
+                (e.currentTarget as HTMLAnchorElement).style.color = '#FFFFFF';
               }}
             >
               수강 상담 신청하기
-            </button>
+            </a>
           </div>
         </div>
       </section>
